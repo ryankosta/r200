@@ -1,4 +1,6 @@
 module hazard(
+rs1val_cont,	
+rs2val_cont,	
 id_rs1,
 id_rs2,
 ex_rd,
