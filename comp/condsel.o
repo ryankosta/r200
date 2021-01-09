@@ -1,0 +1,99 @@
+#! /usr/local/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1017-g1bb355a9)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/local/lib/ivl/system.vpi";
+:vpi_module "/usr/local/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/local/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/local/lib/ivl/v2005_math.vpi";
+:vpi_module "/usr/local/lib/ivl/va_math.vpi";
+S_0x55b263ea8050 .scope module, "condsel" "condsel" 2 2;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "eq";
+    .port_info 1 /INPUT 1 "ne";
+    .port_info 2 /INPUT 1 "lt";
+    .port_info 3 /INPUT 1 "ge";
+    .port_info 4 /INPUT 1 "ltu";
+    .port_info 5 /INPUT 1 "geu";
+    .port_info 6 /INPUT 3 "sel";
+    .port_info 7 /OUTPUT 1 "out";
+o0x7fc0f97e0018 .functor BUFZ 1, C4<z>; HiZ drive
+v0x55b263ea82b0_0 .net "eq", 0 0, o0x7fc0f97e0018;  0 drivers
+o0x7fc0f97e0048 .functor BUFZ 1, C4<z>; HiZ drive
+v0x55b263ecbb10_0 .net "ge", 0 0, o0x7fc0f97e0048;  0 drivers
+o0x7fc0f97e0078 .functor BUFZ 1, C4<z>; HiZ drive
+v0x55b263ecbbd0_0 .net "geu", 0 0, o0x7fc0f97e0078;  0 drivers
+o0x7fc0f97e00a8 .functor BUFZ 1, C4<z>; HiZ drive
+v0x55b263ecbc70_0 .net "lt", 0 0, o0x7fc0f97e00a8;  0 drivers
+o0x7fc0f97e00d8 .functor BUFZ 1, C4<z>; HiZ drive
+v0x55b263ecbd30_0 .net "ltu", 0 0, o0x7fc0f97e00d8;  0 drivers
+o0x7fc0f97e0108 .functor BUFZ 1, C4<z>; HiZ drive
+v0x55b263ecbe40_0 .net "ne", 0 0, o0x7fc0f97e0108;  0 drivers
+v0x55b263ecbf00_0 .var "out", 0 0;
+o0x7fc0f97e0168 .functor BUFZ 3, C4<zzz>; HiZ drive
+v0x55b263ecbfc0_0 .net "sel", 2 0, o0x7fc0f97e0168;  0 drivers
+E_0x55b263eba9c0/0 .event edge, v0x55b263ecbfc0_0, v0x55b263ea82b0_0, v0x55b263ecbe40_0, v0x55b263ecbc70_0;
+E_0x55b263eba9c0/1 .event edge, v0x55b263ecbb10_0, v0x55b263ecbd30_0, v0x55b263ecbbd0_0;
+E_0x55b263eba9c0 .event/or E_0x55b263eba9c0/0, E_0x55b263eba9c0/1;
+    .scope S_0x55b263ea8050;
+T_0 ;
+    %wait E_0x55b263eba9c0;
+    %load/vec4 v0x55b263ecbfc0_0;
+    %dup/vec4;
+    %pushi/vec4 0, 0, 3;
+    %cmp/u;
+    %jmp/1 T_0.0, 6;
+    %dup/vec4;
+    %pushi/vec4 1, 0, 3;
+    %cmp/u;
+    %jmp/1 T_0.1, 6;
+    %dup/vec4;
+    %pushi/vec4 4, 0, 3;
+    %cmp/u;
+    %jmp/1 T_0.2, 6;
+    %dup/vec4;
+    %pushi/vec4 5, 0, 3;
+    %cmp/u;
+    %jmp/1 T_0.3, 6;
+    %dup/vec4;
+    %pushi/vec4 6, 0, 3;
+    %cmp/u;
+    %jmp/1 T_0.4, 6;
+    %dup/vec4;
+    %pushi/vec4 7, 0, 3;
+    %cmp/u;
+    %jmp/1 T_0.5, 6;
+    %jmp T_0.6;
+T_0.0 ;
+    %load/vec4 v0x55b263ea82b0_0;
+    %store/vec4 v0x55b263ecbf00_0, 0, 1;
+    %jmp T_0.6;
+T_0.1 ;
+    %load/vec4 v0x55b263ecbe40_0;
+    %store/vec4 v0x55b263ecbf00_0, 0, 1;
+    %jmp T_0.6;
+T_0.2 ;
+    %load/vec4 v0x55b263ecbc70_0;
+    %store/vec4 v0x55b263ecbf00_0, 0, 1;
+    %jmp T_0.6;
+T_0.3 ;
+    %load/vec4 v0x55b263ecbb10_0;
+    %store/vec4 v0x55b263ecbf00_0, 0, 1;
+    %jmp T_0.6;
+T_0.4 ;
+    %load/vec4 v0x55b263ecbd30_0;
+    %store/vec4 v0x55b263ecbf00_0, 0, 1;
+    %jmp T_0.6;
+T_0.5 ;
+    %load/vec4 v0x55b263ecbbd0_0;
+    %store/vec4 v0x55b263ecbf00_0, 0, 1;
+    %jmp T_0.6;
+T_0.6 ;
+    %pop/vec4 1;
+    %jmp T_0;
+    .thread T_0, $push;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "condsel.v";
