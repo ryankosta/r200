@@ -87,6 +87,9 @@ wire [2:0] rs2val_cont;
 //pc control
 wire [31:0] pcp4_hold;
 wire [1:0] pcsel;
+//id ops muxd
+wire [31:0] id_op1muxed;
+wire [31:0] id_op2muxed;
 
 r200if ifetch(
 	.clk(clk),
@@ -123,14 +126,16 @@ r200id idecode(
 	.wbsel(id_wbsel),
 	.isbr(id_isbr),
 	.willjmp(id_willjmp),
-	.op1(id_op1),
-	.op2(id_op2),
+	.op1(id_op1_muxed),
+	.op2(id_op2_muxed),
+	.alu_cont(id_alu_cont),
 	.rs1o(id_rs1o),
 	.rs2o(id_rs2o),
 	.rs2addr(id_rs2addr),
 	.reg_win(wb_reg_win)
 );
 id_ex_reg id_ex_cont(
+	.clk(clk),
 	.id_funcsel(id_funcsel),
 	.id_memwr(id_memwr),
 	.id_regwr(id_regwr),
@@ -141,6 +146,7 @@ id_ex_reg id_ex_cont(
 	.id_op1(id_op1),
 	.id_op2(id_op2),
 	.id_alu_cont(id_alu_cont),
+	.id_rs1o(id_rs2o),
 	.id_rs2o(id_rs2o),
 	.id_rs2addr(id_rs2addr),
 	.id_instrn(id_instrn),
@@ -153,9 +159,11 @@ id_ex_reg id_ex_cont(
 	.ex_op1(ex_op1),
 	.ex_op2(ex_op2),
 	.ex_alu_cont(ex_alu_cont),
+	.ex_rs1o(ex_rs2o),
 	.ex_rs2o(ex_rs2o),
 	.ex_rs2addr(ex_rs2addr),
 	.ex_func3(ex_func3),
+	.rst(if_pc_rst),
 	.stall(id_ex_stall)
 
 );
@@ -174,6 +182,7 @@ r200ex execute(
 
 );
 ex_mem_reg ex_mem_cont(
+	.clk(clk),
 	.ex_alu_res(ex_alu_res),
 	.ex_rs2o(ex_rs2o),
 	.ex_memwr(ex_memwr),
@@ -198,6 +207,7 @@ r200mem memwrite(
 );
 
 mem_wb_reg mem_wb_cont(
+	.clk(clk),
 	.mem_dmem_out(mem_dmem_out),
 	.mem_alu_res(mem_alu_res),
 	.mem_pcp4(mem_pcp4),
@@ -254,20 +264,22 @@ pccont pccontrol(
 	.rst(if_pc_rst)
 );
 mux8w32 rs1mux(
-	.a(id_rs1o),
+	.a(id_op1),
 	.c(ex_alu_res),
 	.e(mem_alu_res),
 	.g(wb_alu_res),
 	.h(wb_dmem_out),
+	.out(id_op1_muxed),
 
 	.sel(rs1val_cont)
 );
 mux8w32 rs2mux(
-	.a(id_rs2o),
+	.a(id_op2),
 	.c(ex_alu_res),
 	.e(mem_alu_res),
 	.g(wb_alu_res),
 	.h(wb_dmem_out),
+	.out(id_op2_muxed),
 	.sel(rs2val_cont)
 );
 endmodule

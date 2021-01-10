@@ -1,6 +1,7 @@
 module id_ex_reg(
 	//clk
 	clk,
+	rst,
 	//id
 	id_funcsel,
 	id_memwr,
@@ -85,6 +86,7 @@ input wire id_willjmp;
 
 //stall logic
 input wire stall;
+input wire rst;
 reg stalldata; //if stalldata is valid
 //stall data
 reg [31:0] stall_rs2o; //rs2 out
@@ -98,6 +100,9 @@ reg stall_regwr;
 reg stall_func3;
 reg stall_isbr;
 reg stall_willjmp;
+always @(rst) begin
+	stalldata <= 0;
+end
 
 always @(posedge clk) begin
 	if(!stall & !stalldata) begin
