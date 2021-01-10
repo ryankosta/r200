@@ -20,6 +20,8 @@ module r200id(
 	reg_win,
 	jump_imm,
 	jump_addimm,
+	isbr,
+	willjmp
 );
 //clock
 input wire clk;
@@ -53,6 +55,8 @@ output wire regwr;
 output wire [1:0] wbsel;
 output wire [1:0] pcsel;
 output wire rs2addrsel;
+output wire isbr;
+output wire willjmp;
 //op wires
 output wire [31:0] op1;
 output wire [31:0] op2;
@@ -88,7 +92,8 @@ decoder decoderinst(
 	.regwr(regwr),
 	.wasel(wasel),
 	.wbsel(wbsel),
-	.pcsel(pcsel)
+	.isbr(isbr),
+	.willjmp(willjmp)
 );	
 alucont alucontroller(
 	.instrn30(instrn[30]),

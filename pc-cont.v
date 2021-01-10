@@ -4,7 +4,7 @@ module pccont(
 	ex_jmp,
 	ex_isbr,
 	ex_willbr,
-	pcsel
+	pcsel,
 	pcp4_hold,
 	pcp4,
 	if_id_stall

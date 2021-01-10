@@ -18,6 +18,7 @@
 
 //pipeline control
 `include "hazard.v"
+`include "pc-cont.v"
 
 /* ALU SECTION */
 

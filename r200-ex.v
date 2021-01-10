@@ -5,7 +5,9 @@ module r200ex(
 	func3,
 	jump_imm,
 	jump_addimm,
-	alu_res
+	alu_res,
+	pc_jumptarg,
+	willbr
 );
 //----------Input
 input wire [31:0] op1;
@@ -16,6 +18,8 @@ input wire jump_imm;
 input wire jump_addimm; 
 //----------Output
 output wire [31:0] alu_res;
+output wire [31:0] pc_jumptarg;
+output wire willbr;
 //----------Intermediates
 //comparitor wires
 wire comp_eq;
@@ -65,7 +69,7 @@ condsel branchsel(
 	.ltu(comp_ltu),
 	.geu(comp_geu),
 	.sel(func3),
-	.out(branchif)
+	.out(willbr)
 );
 
 endmodule

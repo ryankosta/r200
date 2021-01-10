@@ -10,7 +10,8 @@ module decoder(
 	ra2sel, // rs1 = 0 rd = 1
 	wasel, // rd = 0 x1 = 1
 	wbsel, // alu = 0 mem = 1 pc+4 = 2
-	pcsel // pc = 0  br = 1 jump = 2 
+	isbr,
+	willjmp
 );
 input wire [6:0] opcode;
 input wire equal;
@@ -22,7 +23,8 @@ output reg memwr;
 output reg regwr;
 output reg wasel;
 output reg [1:0] wbsel;
-output reg [1:0] pcsel;
+output reg isbr;
+output reg willjmp;
 always @* begin
 	case(opcode)
 		7'b0110011: //ALU
@@ -35,7 +37,8 @@ always @* begin
 			regwr = 1;
 			wbsel = 0; //write reg from alu 
 			wasel = 0; //write to rd
-			pcsel = 0; //pc+4
+			isbr = 0;
+			willjmp = 0;
 			end
 		7'b0010011: //ALUi	
 			begin
@@ -47,17 +50,16 @@ always @* begin
 			regwr = 1;
 			wbsel = 0; //write reg from alu 
 			wasel = 0; //write to rd
-			pcsel = 0; //pc+4
+			isbr = 0;
+			willjmp = 0;
 			end
 		7'b1100011: //Branch
 			begin
 			ra2sel = 0; //rs2 addr = rs2 addr	
 			memwr = 0;	
 			regwr = 0;
-			if(equal)
-				pcsel = 1; //branch
-			else
-				pcsel = 0; //pc+4
+			willjmp = 0;
+			isbr = 1;
 			end
 		7'b0000011: //Load
 			begin
@@ -69,7 +71,8 @@ always @* begin
 			regwr = 1; 
 			wbsel = 1; //write from mem to reg
 			wasel = 0; //write to rd
-			pcsel = 0;
+			willjmp = 0;
+			isbr = 0;
 			end	
 		7'b0100011: //Store
 			begin
@@ -81,7 +84,8 @@ always @* begin
 			regwr = 0;
 			wbsel = 0; //write from alu to reg 
 			wasel = 0; //write to rd
-			pcsel = 0;
+			willjmp = 0;
+			isbr = 0;
 			end	
 		7'b1101111: //Jump and link relative (jalr)
 			begin
@@ -91,7 +95,8 @@ always @* begin
 			regwr = 1;
 			wbsel = 2; //write pc+4 to reg
 			wasel = 0; //write to rd
-			pcsel = 2;
+			willjmp = 1;
+			isbr = 0;
 			end
 		7'b1101111: //Jump and link (jal)
 			begin
@@ -101,7 +106,8 @@ always @* begin
 			regwr = 0;	
 			wbsel = 2; //write pc+4 to reg
 			wasel = 1; //write to x1 reg
-			pcsel = 2;
+			willjmp = 1;
+			isbr = 0;
 			end
 		7'b0110111: //load upper immediate
 			begin
@@ -112,7 +118,8 @@ always @* begin
 			memwr = 0;	
 			wasel = 0; //write to rd reg
 			wbsel = 0; //write to reg from alu
-			pcsel = 0; //pc+4
+			willjmp = 0;
+			isbr = 0;
 			end
 		7'b0010111: //add upper immediate program counter
 			begin
@@ -122,7 +129,8 @@ always @* begin
 			memwr = 0;	
 			wasel = 0; //write to rd reg
 			wbsel = 0; //write to reg from alu
-			pcsel = 0; //pc+4
+			willjmp = 0;
+			isbr = 0;
 			end
 		
 	endcase

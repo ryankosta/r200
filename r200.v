@@ -38,6 +38,8 @@ wire [31:0] id_pc_brtarg;
 wire [31:0] id_op1;
 wire [31:0] id_op2;
 wire [5:0] id_rs1addr;
+wire id_isbr;
+wire id_willjmp;
 //ex input
 wire [31:0] ex_dmem_out;
 wire [31:0] ex_immsel;
@@ -46,6 +48,10 @@ wire [31:0] ex_op2;
 wire ex_alu_cont;
 wire [2:0] ex_func3;
 wire ex_funcsel;
+wire ex_isbr;
+wire ex_willjmp;
+wire [31:0] ex_jump_imm;
+wire [31:0] ex_jump_addimm;
 //ex output
 wire [31:0] ex_alu_res;
 wire [31:0] ex_rs2o;
@@ -54,8 +60,8 @@ wire [1:0] ex_wbsel;
 wire [31:0] ex_pcp4;
 wire [4:0] ex_rdaddr;
 wire [4:0] ex_rs2addr;
-wire [31:0] ex_jump_imm;
-wire [31:0] ex_jump_addimm;
+wire [31:0] ex_jumptarg;
+wire ex_willbr;
 //mem input 
 wire [31:0] mem_rs2o;
 wire mem_memwr;
@@ -105,7 +111,8 @@ r200id idecode(
 	.memwr(id_memwr),
 	.regwr(id_regwr),
 	.wbsel(id_wbsel),
-	.pcsel(id_pcsel),
+	.isbr(id_isbr),
+	.willjmp(id_willjmp),
 	.op1(id_op1),
 	.op2(id_op2),
 	.rs1o(id_rs1o),
@@ -119,7 +126,8 @@ id_ex_reg id_ex_cont(
 	.id_regwr(id_regwr),
 	.id_wasel(id_wasel),
 	.id_wbsel(id_wbsel),
-	.id_pcsel(id_pcsel),
+	.id_isbr(id_isbr),
+	.id_willjmp(id_willjmp),
 	.id_op1(id_op1),
 	.id_op2(id_op2),
 	.id_alu_cont(id_alu_cont),
@@ -151,7 +159,9 @@ r200ex execute(
 	//out
 	.jump_imm(ex_jump_imm),
 	.jump_addimm(ex_jump_addimm),
-	.alu_res(ex_alu_res)
+	.alu_res(ex_alu_res),
+	.willbr(ex_willbr),
+	.pc_jumptarg(ex_jumptarg)
 
 );
 ex_mem_reg ex_mem_cont(
@@ -217,9 +227,15 @@ hazard hazard_cont(
 	.wb_wbsel(wb_wbsel),
 	.wb_regwr(wb_regwr)
 );
+pccont pccontrol(
+	.id_jmp(id_jmp),
+	.id_isbr(id_isbr),
+	.ex_jmp(ex_jmp),
+	.ex_isbr(ex_isbr)
+);
 Mux8way32 rs1mux(
 	.a(id_rs1o),
-	.c(ex_alu_res)
+	.c(ex_alu_res),
 	.e(mem_alu_res),
 	.g(wb_alu_res),
 	.h(wb_mem),

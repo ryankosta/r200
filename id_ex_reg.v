@@ -7,7 +7,8 @@ module id_ex_reg(
 	id_regwr,
 	id_wasel,
 	id_wbsel,
-	id_pcsel,
+	id_isbr,
+	id_willjmp,
 	id_op1,
 	id_op2,
 	id_alu_cont,
@@ -21,6 +22,8 @@ module id_ex_reg(
 	ex_regwr,
 	ex_wasel,
 	ex_wbsel,
+	ex_isbr,
+	ex_willjmp,
 	ex_op1,
 	ex_op2,
 	ex_alu_cont,
@@ -53,6 +56,9 @@ output reg [4:0] ex_rs2addr; //rs2 addr
 output reg [31:0] ex_dmem_out;
 //func3
 output reg [2:0] ex_func3;
+//pc wires
+output reg ex_isbr;
+output reg ex_willjmp;
 //----------Input
 //clock
 input wire clk;
@@ -77,8 +83,12 @@ input wire [31:0] id_rs2o; //rs2 out
 input wire [4:0] id_rdaddr; //rs2 addr 
 //data memory wires
 input wire [31:0] id_dmem_out;
-
 input wire [4:0] id_rs2addr; //rs2 addr 
+//pc wires
+input wire id_isbr;
+input wire id_willjmp;
+
+
 //stall logic
 input wire stall;
 reg stalldata; //if stalldata is valid
@@ -92,11 +102,13 @@ reg stall_alu_cont;
 reg stall_memwr;
 reg stall_regwr;
 reg stall_func3;
+reg stall_isbr;
+reg stall_willjmp;
 
 always @(posedge clk) begin
-	if(stalldata)
-		stalldata <= 0;
 	if(!stall & !stalldata) begin
+	ex_isbr <= id_isbr;
+	ex_willjmp <= id_willjmp;
 	ex_funcsel <= id_funcsel;
 	ex_memwr <= id_memwr;
 	ex_regwr <= id_regwr;
@@ -111,6 +123,8 @@ always @(posedge clk) begin
 	end
 	else if(stall & !stalldata) begin
 		stall_funcsel <= id_funcsel;
+		stall_isbr <= id_isbr;
+		stall_willjmp <= id_willjmp;
 		stall_memwr <= id_memwr;
 		stall_regwr <= id_regwr;
 		stall_op1 <= id_op1;
@@ -129,6 +143,9 @@ always @(posedge clk) begin
 		ex_alu_cont <= stall_alu_cont;
 		ex_rs2o <= stall_rs2o;
 		ex_func3 <= stall_func3;
+		ex_isbr <= stall_isbr;
+		ex_willjmp <= stall_willjmp;
+		stalldata <= 0;
 	end
 	if(stall) begin
 		ex_funcsel <= 0;
