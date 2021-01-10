@@ -107,9 +107,11 @@ if_id_reg if_id_cont(
 	.if_pcp4(if_pcp4),
 	.id_instrn(id_instrn),
 	.id_pc_addrout(id_pc_addrout),
-	.id_pcp4(id_pcp4)
+	.id_pcp4(id_pcp4),
+	.retire(if_id_retire)
 );
 r200id idecode(
+	.clk(clk),
 	.pc_addrout(id_pc_addrout),
 	.instrn(id_instrn),
 	.pcp4(id_pcp4),
@@ -153,7 +155,8 @@ id_ex_reg id_ex_cont(
 	.ex_alu_cont(ex_alu_cont),
 	.ex_rs2o(ex_rs2o),
 	.ex_rs2addr(ex_rs2addr),
-	.ex_func3(ex_func3)
+	.ex_func3(ex_func3),
+	.stall(id_ex_stall)
 
 );
 r200ex execute(
@@ -235,7 +238,8 @@ hazard hazard_cont(
 
 	.wb_rd(wb_rdaddr),
 	.wb_wbsel(wb_wbsel),
-	.wb_regwr(wb_regwr)
+	.wb_regwr(wb_regwr),
+	.stall(id_ex_stall)
 );
 pccont pccontrol(
 	.id_jmp(id_willjmp),
