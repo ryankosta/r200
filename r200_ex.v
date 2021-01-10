@@ -30,7 +30,6 @@ wire comp_ltu;
 //alu wires
 wire alu_0;
 wire alu_neg;
-wire alu_cont;
 
 
 
@@ -49,7 +48,7 @@ alu aluinst(
 jumptarggen_ex jumptarggenerator(
 	.jumptarg(pc_jumptarg),
 	.immediate(jump_imm),
-	.addtoimmediate(jump_addimm),
+	.addtoimmediate(jump_addimm)
 );
 condgen comparitor(
 	.a(op1),
@@ -59,7 +58,7 @@ condgen comparitor(
 	.lt(comp_lt),
 	.ge(comp_ge),
 	.ltu(comp_ltu),
-	.geu(comp_geu),
+	.geu(comp_geu)
 );
 condsel branchsel(
 	.eq(comp_eq),
