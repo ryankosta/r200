@@ -11,7 +11,8 @@ mem_wbsel,
 mem_rd,
 wb_regwr,
 wb_wbsel,
-wb_rd
+wb_rd,
+stall
 );
 output reg stall;
 //--register source val control (controls ex in source)
