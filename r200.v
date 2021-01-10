@@ -242,7 +242,8 @@ pccont pccontrol(
 	.ex_willbr(ex_willbr),
 	.pcsel(pcsel),
 	.pcp4_hold(pcp4_hold),
-	.if_id_retire(if_id_retire)
+	.if_id_retire(if_id_retire),
+	.rst(if_pc_rst)
 );
 mux8w32 rs1mux(
 	.a(id_rs1o),

@@ -7,6 +7,7 @@ module pccont(
 	pcsel,
 	pcp4_hold,
 	pcp4,
+	rst,
 	if_id_retire
 );
 input wire id_jmp;
@@ -14,12 +15,17 @@ input wire id_isbr;
 input wire ex_jmp;
 input wire ex_isbr;
 input wire ex_willbr;
+input wire rst;
 input wire [31:0] pcp4;
 output reg [1:0] pcsel;
 output reg [31:0] pcp4_hold;
 output reg if_id_retire; //retire instruction passed into if/id reg at next posedge clk
 always @(*) begin
-	if(id_jmp) begin
+	if(rst) begin
+		pcsel <= 0;
+		if_id_retire <= 0;
+	end
+	else if(id_jmp) begin
 		if_id_retire <= 1;
 	end
 	else if(id_isbr) begin
