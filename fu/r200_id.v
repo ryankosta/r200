@@ -17,6 +17,8 @@ module r200id(
 	rs1o,
 	rs2o,
 	rs2addr,
+	rdaddr_in,
+	rdaddr_out,
 	reg_win,
 	jump_imm,
 	jump_addimm,

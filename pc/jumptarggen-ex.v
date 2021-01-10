@@ -1,4 +1,3 @@
-`include "cpu.vh"
 module jumptarggen_ex(
 jumptarg,
 immediate,

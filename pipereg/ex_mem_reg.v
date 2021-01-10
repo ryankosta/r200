@@ -1,4 +1,3 @@
-`include "cpu.vh"
 module ex_mem_reg(
 	clk,
 	//ex

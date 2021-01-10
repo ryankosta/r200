@@ -1,4 +1,3 @@
-`include "cpu.vh"
 module jumptarggen_id(
 immediate,
 addtoimm,
@@ -10,8 +9,6 @@ instrn
 input wire [31:0] pc;
 input wire [31:0] rs1;
 input wire [31:0] instrn; 
-//output
-output wire [31:0] jumptarg;
 //muxed intermediates
 wire [31:0] jalrimm;
 wire [31:0] jalimm;
