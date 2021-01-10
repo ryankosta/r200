@@ -20,7 +20,7 @@ output reg [31:0] out;
 //intermediate
 reg [7:0] ram [1375:0];
 
-always @(negedge clk) begin
+always @(posedge clk) begin
 	out[7:0] <= ram [raddr];
 	out[15:8] <= ram [raddr+1];
 	out[23:16] <= ram [raddr+2];
