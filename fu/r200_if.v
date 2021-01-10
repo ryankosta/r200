@@ -3,6 +3,7 @@ module r200if(
 	pc_addrin,
 	pc_addrout,
 	pcp4,
+	pcp4_hold,
 	pc_brtarg,
 	pc_jumptarg,
 	pc_rst,
@@ -14,6 +15,7 @@ input wire clk;
 input wire [31:0] pc_brtarg;
 input wire [31:0] pc_jumptarg;
 input wire [31:0] pc_addrin;
+input wire [31:0] pcp4_hold;
 input wire [1:0] pcsel;
 input wire pc_rst; // TODO: leave as reg or not?
 //output
@@ -43,6 +45,7 @@ mux4w32 pcselector(
 	.a(pcp4),
 	.b(pc_brtarg),
 	.c(pc_jumptarg),
+	.d(pcp4_hold),
 	.out(pc_addrin),
 	.sel(pcsel)
 );

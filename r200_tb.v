@@ -1,8 +1,8 @@
+`include "r200.v"
 module r200_tb;
 
 reg clock;
 reg waddr;
-reg [31:0] instrn;
 
 
 initial begin
@@ -15,9 +15,9 @@ initial begin
 //        	instrn = instrn | (32'b110 << 12); // add
 //        	instrn = instrn | (32'h0 << 15); //rs = x3
 //        	instrn = instrn | (32'd12 << 20); //imm = 12
-		$readmemh("/home/rkosta/dev/verilog/riscv-unpipe/asm/curr.8b.hex",cpu.instrnmem.ram);
-		#9 cpu.pc_rst = 1;
-		#14 cpu.pc_rst = 0;
+		$readmemh("/home/rkosta/dev/verilog/r200/asm/curr.8b.hex",cpu.ifetch.instrnmem.ram);
+		#9 cpu.if_pc_rst = 1;
+		#14 cpu.if_pc_rst = 0;
 
 
 //		cpu.instrnmem.ram[waddr] <= instrn[7:0];

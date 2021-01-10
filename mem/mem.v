@@ -18,7 +18,7 @@ input clk;
 output reg [31:0] out;
 
 //intermediate
-reg [7:0] ram [1371:0];
+reg [7:0] ram [1375:0];
 
 always @(negedge clk) begin
 	out[7:0] <= ram [raddr];

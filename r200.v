@@ -7,7 +7,7 @@ input wire clk;
 //if input
 wire [31:0] if_pc_brtarg;
 wire [31:0] if_pc_jumptarg;
-wire if_pc_rst;
+reg if_pc_rst;
 //if output
 wire [31:0] if_instrn;
 wire [31:0] if_pc_addrout;
@@ -61,6 +61,7 @@ wire [31:0] ex_pcp4;
 wire [4:0] ex_rdaddr;
 wire [4:0] ex_rs2addr;
 wire [31:0] ex_jumptarg;
+wire [31:0] ex_brtarg;
 wire ex_willbr;
 //mem input 
 wire [31:0] mem_rs2o;
@@ -84,14 +85,21 @@ wire [31:0] wb_reg_win;
 //hazard control
 wire [2:0] rs1val_cont;
 wire [2:0] rs2val_cont;
+//pc control
+wire [31:0] pcp4_hold;
+wire [1:0] pcsel;
 
 r200if ifetch(
+	.clk(clk),
 	.pc_addrout(if_pc_addrout),
 	.instrn(if_instrn),
 	.pcp4(if_pcp4),
-	.pc_brtarg(if_pc_brtarg),
-	.pc_jumptarg(if_pc_jumptarg),
-	.pc_rst(if_pc_rst)
+	.pc_rst(if_pc_rst),
+
+	.pc_brtarg(id_pc_brtarg),
+	.pc_jumptarg(ex_jumptarg),
+	.pcp4_hold(pcp4_hold),
+	.pcsel(pcsel)
 );	
 if_id_reg if_id_cont(
 	.clk(clk),
@@ -133,7 +141,6 @@ id_ex_reg id_ex_cont(
 	.id_alu_cont(id_alu_cont),
 	.id_rs2o(id_rs2o),
 	.id_rs2addr(id_rs2addr),
-	.id_dmem_out(id_dmem_out),
 	.id_instrn(id_instrn),
 
 	.ex_funcsel(ex_funcsel),
@@ -146,7 +153,6 @@ id_ex_reg id_ex_cont(
 	.ex_alu_cont(ex_alu_cont),
 	.ex_rs2o(ex_rs2o),
 	.ex_rs2addr(ex_rs2addr),
-	.ex_dmem_out(ex_dmem_out),
 	.ex_func3(ex_func3)
 
 );
@@ -228,10 +234,15 @@ hazard hazard_cont(
 	.wb_regwr(wb_regwr)
 );
 pccont pccontrol(
-	.id_jmp(id_jmp),
+	.id_jmp(id_willjmp),
 	.id_isbr(id_isbr),
-	.ex_jmp(ex_jmp),
-	.ex_isbr(ex_isbr)
+	.pcp4(id_pcp4),
+	.ex_jmp(ex_willjmp),
+	.ex_isbr(ex_isbr),
+	.ex_willbr(ex_willbr),
+	.pcsel(pcsel),
+	.pcp4_hold(pcp4_hold),
+	.if_id_retire(if_id_retire)
 );
 mux8w32 rs1mux(
 	.a(id_rs1o),
