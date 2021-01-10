@@ -4,21 +4,21 @@
 /* R200 section */
 
 //r200 pipeline units
-`include "r200_id.v"
-`include "r200_if.v"
-`include "r200_ex.v"
-`include "r200_mem.v"
-`include "r200_wb.v"
+`include "fu/r200_id.v"
+`include "fu/r200_if.v"
+`include "fu/r200_ex.v"
+`include "fu/r200_mem.v"
+`include "fu/r200_wb.v"
 
 //pipeline reg units
-`include "if_id_reg.v"
-`include "id_ex_reg.v"
-`include "ex_mem_reg.v"
-`include "mem_wb_reg.v"
+`include "pipereg/if_id_reg.v"
+`include "pipereg/id_ex_reg.v"
+`include "pipereg/ex_mem_reg.v"
+`include "pipereg/mem_wb_reg.v"
 
 //pipeline control
-`include "hazard.v"
-`include "pc-cont.v"
+`include "pipecont/hazard.v"
+`include "pipecont/pc-cont.v"
 
 /* ALU SECTION */
 
@@ -48,11 +48,11 @@
 
 
 `include "mux.vh"
-`include "decode.v"
-`include "pc.v"
-`include "mem.v"
-`include "dmem-nclk.v"
-`include "regfile.v"
+`include "decode/decode.v"
+`include "pc/pc.v"
+`include "mem/mem.v"
+`include "mem/dmem-nclk.v"
+`include "decode/regfile.v"
 
 
 
@@ -61,14 +61,14 @@
 `include "signex/signex13.v"
 
 //immediate handling
-`include "utypeimm.v"
-`include "ssignex.v"
-`include "isignex.v"
+`include "decode/utypeimm.v"
+`include "signex/ssignex.v"
+`include "signex/isignex.v"
 
 //pc target generation
-`include "jumptarggen-id.v"
-`include "jumptarggen-ex.v"
-`include "branchtarggen.v"
+`include "pc/jumptarggen-id.v"
+`include "pc/jumptarggen-ex.v"
+`include "pc/branchtarggen.v"
 
 //comparitor
 `include "comp.vh"
