@@ -6,7 +6,8 @@ module r200id(
 	instrn,
 	funcsel,
 	memwr,
-	regwr,
+	regwr_out,
+	regwr_in,
 	wbsel,
 	pcsel,
 	rs2addrsel,
@@ -42,6 +43,7 @@ output wire [31:0] jump_addimm;
 
 //Reg writeback
 input wire [31:0] reg_win; //write in
+input wire regwr_in;
 input wire [4:0] rdaddr_in;
 //pcp4
 input wire [31:0] pcp4;
@@ -53,7 +55,7 @@ output wire [31:0] pc_brtarg;
 //decoder wires
 output wire funcsel;
 output wire memwr;
-output wire regwr;
+output wire regwr_out;
 output wire [1:0] wbsel;
 output wire [1:0] pcsel;
 output wire rs2addrsel;
@@ -91,7 +93,7 @@ decoder decoderinst(
 	.op2sel(op2sel),
 	.funcsel(funcsel),
 	.memwr(memwr),
-	.regwr(regwr),
+	.regwr(regwr_out),
 	.wasel(wasel),
 	.wbsel(wbsel),
 	.isbr(isbr),
@@ -110,7 +112,7 @@ regfile gpr(
 	.rs2o(rs2o),
 	.win(reg_win),
 	.clk(clk),
-	.regwr(regwr)
+	.regwr(regwr_in)
 );
 isignex isignextender(
 	.instrn31_20(instrn[31:20]),

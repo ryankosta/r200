@@ -32,7 +32,6 @@ wire id_alu_cont;
 wire [31:0] id_rs1o;
 wire [31:0] id_rs2o;
 wire [4:0] id_rs2addr;
-wire [31:0] id_reg_win;
 wire [31:0] id_dmem_out;
 wire [31:0] id_pc_brtarg;
 wire [31:0] id_op1;
@@ -117,7 +116,8 @@ r200id idecode(
 	.pc_brtarg(id_pc_brtarg),
 	.funcsel(id_funcsel),
 	.memwr(id_memwr),
-	.regwr(id_regwr),
+	.regwr_out(id_regwr),
+	.regwr_in(wb_regwr),
 	.wbsel(id_wbsel),
 	.isbr(id_isbr),
 	.willjmp(id_willjmp),
@@ -126,7 +126,7 @@ r200id idecode(
 	.rs1o(id_rs1o),
 	.rs2o(id_rs2o),
 	.rs2addr(id_rs2addr),
-	.reg_win(id_reg_win)
+	.reg_win(wb_reg_win)
 );
 id_ex_reg id_ex_cont(
 	.id_funcsel(id_funcsel),
@@ -174,12 +174,14 @@ ex_mem_reg ex_mem_cont(
 	.ex_alu_res(ex_alu_res),
 	.ex_rs2o(ex_rs2o),
 	.ex_memwr(ex_memwr),
+	.ex_regwr(ex_regwr),
 	.ex_wbsel(ex_wbsel),
 	.ex_pcp4(ex_pcp4),
 	.ex_rdaddr(ex_rdaddr),
 
 	.mem_alu_res(mem_alu_res),
 	.mem_rs2o(mem_rs2o),
+	.mem_regwr(mem_regwr),
 	.mem_memwr(mem_memwr),
 	.mem_wbsel(mem_wbsel),
 	.mem_pcp4(mem_pcp4),
@@ -198,12 +200,14 @@ mem_wb_reg mem_wb_cont(
 	.mem_pcp4(mem_pcp4),
 	.mem_wbsel(mem_wbsel),
 	.mem_rdaddr(mem_rdaddr),
+	.mem_regwr(mem_regwr),
 
 	.wb_dmem_out(wb_dmem_out),
 	.wb_alu_res(wb_alu_res),
 	.wb_pcp4(wb_pcp4),
 	.wb_wbsel(wb_wbsel),
-	.wb_rdaddr(wb_rdaddr)
+	.wb_rdaddr(wb_rdaddr),
+	.wb_regwr(wb_regwr)
 );
 
 
