@@ -16,6 +16,7 @@ module id_ex_reg(
 	id_rs1o,
 	id_rs2o,
 	id_rs2addr,
+	id_rdaddr,
 	id_instrn,
 	//ex
 	ex_funcsel,
@@ -31,6 +32,7 @@ module id_ex_reg(
 	ex_rs1o,
 	ex_rs2o,
 	ex_rs2addr,
+	ex_rdaddr,
 	ex_func3,
 	//stall
 	stall
@@ -52,6 +54,7 @@ output reg ex_alu_cont;
 output reg [31:0] ex_rs1o; //rs1 out
 output reg [31:0] ex_rs2o; //rs2 out
 output reg [4:0] ex_rs2addr; //rs2 addr 
+output reg [4:0] ex_rdaddr; //rs2 addr 
 //data memory wires
 //func3
 output reg [2:0] ex_func3;
@@ -79,6 +82,7 @@ input wire [31:0] id_rs1o; //rs1 out
 input wire [31:0] id_rs2o; //rs2 out
 //data memory wires
 input wire [4:0] id_rs2addr; //rs2 addr 
+input wire [4:0] id_rdaddr; //rs2 addr 
 //pc wires
 input wire id_isbr;
 input wire id_willjmp;
@@ -113,6 +117,7 @@ always @(posedge clk) begin
 	ex_regwr <= id_regwr;
 	ex_wasel <= id_wasel;
 	ex_wbsel <= id_wbsel;
+	ex_rdaddr <= id_rdaddr;
 	ex_op1 <= id_op1;
 	ex_op2 <= id_op2;
 	ex_alu_cont <= id_alu_cont;
@@ -130,6 +135,7 @@ always @(posedge clk) begin
 		stall_op2 <= id_op2;
 		stall_alu_cont <= id_alu_cont;
 		stall_rs2o <= id_rs2o;
+		stall_rdaddr <= id_rdaddr; 
 		stall_func3 <= id_instrn[14:12]; //id's rdaddr_out
 		stalldata <= 1;
 	end
@@ -143,6 +149,7 @@ always @(posedge clk) begin
 		ex_rs2o <= stall_rs2o;
 		ex_func3 <= stall_func3;
 		ex_isbr <= stall_isbr;
+		ex_rdaddr <= stall_rdaddr;
 		ex_willjmp <= stall_willjmp;
 		stalldata <= 0;
 	end

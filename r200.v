@@ -31,11 +31,12 @@ wire id_rs2addrsel;
 wire id_alu_cont;
 wire [31:0] id_rs1o;
 wire [31:0] id_rs2o;
-wire [4:0] id_rs2addr;
-wire [31:0] id_dmem_out;
-wire [31:0] id_pc_brtarg;
 wire [31:0] id_op1;
 wire [31:0] id_op2;
+wire [4:0] id_rs2addr;
+wire [4:0] id_rdaddr;
+wire [31:0] id_dmem_out;
+wire [31:0] id_pc_brtarg;
 wire [5:0] id_rs1addr;
 wire id_isbr;
 wire id_willjmp;
@@ -88,8 +89,8 @@ wire [2:0] rs2val_cont;
 wire [31:0] pcp4_hold;
 wire [1:0] pcsel;
 //id ops muxd
-wire [31:0] id_op1muxed;
-wire [31:0] id_op2muxed;
+wire [31:0] id_op1_muxed;
+wire [31:0] id_op2_muxed;
 
 r200if ifetch(
 	.clk(clk),
@@ -132,6 +133,8 @@ r200id idecode(
 	.rs1o(id_rs1o),
 	.rs2o(id_rs2o),
 	.rs2addr(id_rs2addr),
+	.rdaddr_out(id_rdaddr),
+	.rdaddr_in(wb_rdaddr),
 	.reg_win(wb_reg_win)
 );
 id_ex_reg id_ex_cont(
@@ -144,11 +147,12 @@ id_ex_reg id_ex_cont(
 	.id_isbr(id_isbr),
 	.id_willjmp(id_willjmp),
 	.id_op1(id_op1_muxed),
-	.id_op2(id_op2_muxex),
+	.id_op2(id_op2_muxed),
 	.id_alu_cont(id_alu_cont),
 	.id_rs1o(id_rs2o),
 	.id_rs2o(id_rs2o),
 	.id_rs2addr(id_rs2addr),
+	.id_rdaddr(id_rdaddr),
 	.id_instrn(id_instrn),
 
 	.ex_funcsel(ex_funcsel),
@@ -162,6 +166,7 @@ id_ex_reg id_ex_cont(
 	.ex_rs1o(ex_rs2o),
 	.ex_rs2o(ex_rs2o),
 	.ex_rs2addr(ex_rs2addr),
+	.ex_rdaddr(ex_rdaddr),
 	.ex_func3(ex_func3),
 	.rst(if_pc_rst),
 	.stall(id_ex_stall)

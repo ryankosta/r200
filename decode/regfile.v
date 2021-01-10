@@ -27,7 +27,7 @@ always @(*)begin
 	rs1o <= Register[rs1addr];
 	rs2o <= Register[rs2addr];
 end
-always @(posedge clk) begin
+always @(negedge clk) begin
 	if(regwr && rdaddr != 5'h0)
 		Register[rdaddr] <= win;
 end
