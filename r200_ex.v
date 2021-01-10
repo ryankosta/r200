@@ -1,4 +1,3 @@
-`include "cpu.vh"
 module r200ex(
 	op1,
 	op2,
@@ -6,19 +5,21 @@ module r200ex(
 	func3,
 	jump_imm,
 	jump_addimm,
+	alu_res,
 	pc_jumptarg,
-	alu_res
+	willbr
 );
 //----------Input
 input wire [31:0] op1;
 input wire [31:0] op2;
 input wire alu_cont;
 input wire [2:0] func3; //instrn [14:12]
-input wire [31:0] jump_imm; 
-input wire [31:0] jump_addimm; 
+input wire jump_imm; 
+input wire jump_addimm; 
 //----------Output
 output wire [31:0] alu_res;
 output wire [31:0] pc_jumptarg;
+output wire willbr;
 //----------Intermediates
 //comparitor wires
 wire comp_eq;
@@ -29,6 +30,7 @@ wire comp_ltu;
 //alu wires
 wire alu_0;
 wire alu_neg;
+wire alu_cont;
 
 
 
@@ -47,7 +49,7 @@ alu aluinst(
 jumptarggen_ex jumptarggenerator(
 	.jumptarg(pc_jumptarg),
 	.immediate(jump_imm),
-	.addtoimm(jump_addimm)
+	.addtoimmediate(jump_addimm),
 );
 condgen comparitor(
 	.a(op1),
@@ -57,7 +59,7 @@ condgen comparitor(
 	.lt(comp_lt),
 	.ge(comp_ge),
 	.ltu(comp_ltu),
-	.geu(comp_geu)
+	.geu(comp_geu),
 );
 condsel branchsel(
 	.eq(comp_eq),
@@ -67,7 +69,7 @@ condsel branchsel(
 	.ltu(comp_ltu),
 	.geu(comp_geu),
 	.sel(func3),
-	.out(branchif)
+	.out(willbr)
 );
 
 endmodule
