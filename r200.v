@@ -233,21 +233,21 @@ pccont pccontrol(
 	.ex_jmp(ex_jmp),
 	.ex_isbr(ex_isbr)
 );
-Mux8way32 rs1mux(
+mux8w32 rs1mux(
 	.a(id_rs1o),
 	.c(ex_alu_res),
 	.e(mem_alu_res),
 	.g(wb_alu_res),
-	.h(wb_mem),
+	.h(wb_dmem_out),
 
 	.sel(rs1val_cont)
 );
-Mux8way32 rs2mux(
+mux8w32 rs2mux(
 	.a(id_rs2o),
 	.c(ex_alu_res),
 	.e(mem_alu_res),
 	.g(wb_alu_res),
-	.h(wb_mem),
+	.h(wb_dmem_out),
 	.sel(rs2val_cont)
 );
 endmodule

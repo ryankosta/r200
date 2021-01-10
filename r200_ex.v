@@ -14,8 +14,8 @@ input wire [31:0] op1;
 input wire [31:0] op2;
 input wire alu_cont;
 input wire [2:0] func3; //instrn [14:12]
-input wire jump_imm; 
-input wire jump_addimm; 
+input wire [31:0] jump_imm; 
+input wire [31:0] jump_addimm; 
 //----------Output
 output wire [31:0] alu_res;
 output wire [31:0] pc_jumptarg;
@@ -48,7 +48,7 @@ alu aluinst(
 jumptarggen_ex jumptarggenerator(
 	.jumptarg(pc_jumptarg),
 	.immediate(jump_imm),
-	.addtoimmediate(jump_addimm)
+	.addtoimm(jump_addimm)
 );
 condgen comparitor(
 	.a(op1),
