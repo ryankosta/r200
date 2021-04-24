@@ -288,8 +288,11 @@ mux8w32 rs1mux(
 );
 mux8w32 rs2mux(
 	.a(id_op2),
+	.b(1'b0),
 	.c(ex_alu_res),
+	.d(1'b0),
 	.e(mem_alu_res),
+	.f(1'b0),
 	.g(wb_alu_res),
 	.h(wb_dmem_out),
 	.out(id_op2_muxed),
