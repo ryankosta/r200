@@ -211,6 +211,7 @@ ex_mem_reg ex_mem_cont(
 	.mem_rdaddr(mem_rdaddr)
 );
 r200mem memwrite(
+	.clk(clk),
 	.alu_res(mem_alu_res),
 	.rs2o(mem_rs2o),
 	.memwr(mem_memwr),
@@ -236,6 +237,7 @@ mem_wb_reg mem_wb_cont(
 
 
 r200wb writeback(
+	.clk(clk),
 	.wbsel(wb_wbsel),
 	.dmem_out(wb_dmem_out),
 	.alu_res(wb_alu_res),
