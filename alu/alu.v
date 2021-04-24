@@ -48,7 +48,7 @@ adder32 adder(
 	.result(addab),
 	.cin(control),
 	.a(a),
-	.b(b)
+	.b(badd)
 );
 
 mshifter32 shifter(
