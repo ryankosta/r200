@@ -26,6 +26,7 @@ wire comp_eq;
 wire comp_ne;
 wire comp_lt;
 wire comp_ge;
+wire comp_geu;
 wire comp_ltu;
 //alu wires
 wire alu_0;
