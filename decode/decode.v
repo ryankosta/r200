@@ -1,7 +1,6 @@
 //decodes operations
 module decoder(
 	opcode,
-	equal,
 	op1sel, //0 = reg 1 = upperimm
 	op2sel, //0 = reg 1 = itypeimm 2 =stypeimm 3 = pc+4
 	funcsel, //0 = reg 1 = immediate
@@ -14,7 +13,6 @@ module decoder(
 	willjmp
 );
 input wire [6:0] opcode;
-input wire equal;
 output reg op1sel;
 output reg [1:0] op2sel;
 output reg ra2sel;
