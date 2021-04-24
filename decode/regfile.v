@@ -21,7 +21,7 @@ output reg [31:0] rs2o;
 //registers
 reg [31:0] Register [31:0];
 initial begin
-	Register[0] <= 0;
+	Register[0] = 0;
 end
 always @(*)begin
 	rs1o = Register[rs1addr];
