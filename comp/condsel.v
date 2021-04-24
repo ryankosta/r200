@@ -47,6 +47,10 @@ always @* begin
 			begin
 			out = geu;
 			end
+		default:
+			begin
+			out = eq;
+			end
 	endcase
 end
 endmodule
