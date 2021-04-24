@@ -25,8 +25,7 @@ wire shiftdir;
 wire [31:0] orab;
 wire [31:0] notb;
 wire [31:0] badd;
-wire [31:0] addab;
-wire [31:0] subab;
+wire [31:0] addab; //also used in sub instructions
 wire [31:0] andab;
 wire [31:0] xorab;
 wire [31:0] sltab;
