@@ -87,7 +87,6 @@ wire wasel;
 
 decoder decoderinst(
 	.opcode(instrn[6:0]),
-	.equal(branchif), //branch if 1 (and is branch instrn)
 	.ra2sel(rs2addrsel),
 	.op1sel(op1sel),
 	.op2sel(op2sel),
