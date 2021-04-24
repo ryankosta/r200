@@ -132,6 +132,20 @@ always @* begin
 			willjmp = 0;
 			isbr = 0;
 			end
+		default: //no-op: alu without reg commit
+			begin
+			ra2sel = 0; //rs2 addr = rs2 addr	
+			op1sel = 0; //op1 = rs1		
+			op2sel = 0; //op2 = rs2
+			funcsel = 0; 
+			memwr = 0;
+			regwr = 0;
+			wbsel = 0; //write reg from alu 
+			wasel = 0; //write to rd
+			isbr = 0;
+			willjmp = 0;
+
+			end
 		
 	endcase
 end
