@@ -42,6 +42,7 @@ input wire [1:0] wb_wbsel;
 input wire [4:0] wb_rd;
 
 always @(*) begin //TODO: THIS SHOULD BE CLOCK DRIVEN
+	//TODO: should these be else-ifs or should they all be ifs
 	if(ex_regwr) begin
 		if((id_rs1 == ex_rd)&&(id_rs1 != 5'h0)) begin
 			if(ex_wbsel == 2'h0) begin
@@ -97,7 +98,7 @@ always @(*) begin //TODO: THIS SHOULD BE CLOCK DRIVEN
 		end
 	end	
 	else if(wb_regwr) begin	
-		if(id_rs1 == mem_rd) begin
+		if(id_rs1 == wb_rd) begin
 			if(wb_wbsel == 2'h0)
 				rs1val_cont = 3'b110;
 				stall = 0;
@@ -107,7 +108,7 @@ always @(*) begin //TODO: THIS SHOULD BE CLOCK DRIVEN
 		end else begin
 			rs1val_cont = 000;
 		end
-		if(id_rs2 == mem_rd) begin
+		if(id_rs2 == wb_rd) begin
 			if(wb_wbsel == 2'h0)
 				rs2val_cont = 3'b110;
 				stall = 0;
