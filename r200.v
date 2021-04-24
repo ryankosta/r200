@@ -57,6 +57,7 @@ wire [31:0] ex_alu_res;
 wire [31:0] ex_rs2o;
 wire ex_memwr;
 wire ex_regwr;
+wire ex_wasel;
 wire [1:0] ex_wbsel;
 wire [31:0] ex_pcp4;
 wire [4:0] ex_rdaddr;
