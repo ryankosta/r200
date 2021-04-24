@@ -25,7 +25,7 @@ wire andeqgt3; // (a > b)[n-1] & (a == b)[n]
 //first level
 comp4b comp0(.a(a[3:0]),.b(b[3:0]),.gt(gtcomp[0]),.eq(eqcomp[0]));
 comp4b comp1(.a(a[7:4]),.b(b[7:4]),.gt(gtcomp[1]),.eq(eqcomp[1]));
-comp4b comp2(.a(a[11:8]),.b(b[15:12]),.gt(gtcomp[2]),.eq(eqcomp[2]));
+comp4b comp2(.a(a[11:8]),.b(b[11:8]),.gt(gtcomp[2]),.eq(eqcomp[2]));
 comp4b comp3(.a(a[15:12]),.b(b[15:12]),.gt(gtcomp[3]),.eq(eqcomp[3]));
 
 //second level
