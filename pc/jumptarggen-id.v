@@ -16,6 +16,7 @@ wire [31:0] jalimm;
 output wire [31:0] immediate;
 output wire [31:0] addtoimm;
 
+//TODO: fix coding style
 //jal imm [0] = 0 always
 buf(jalimm[0],0);
 //jal imm [10:1] = instrn [21:30] 
