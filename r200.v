@@ -89,6 +89,7 @@ wire wb_regwr;
 //hazard control
 wire [2:0] rs1val_cont;
 wire [2:0] rs2val_cont;
+wire id_ex_stall;
 //pc control
 wire [31:0] pcp4_hold;
 wire [1:0] pcsel;
