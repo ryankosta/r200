@@ -1,6 +1,5 @@
 module r200if(
 	clk,
-	pc_addrin,
 	pc_addrout,
 	pcp4,
 	pcp4_hold,
@@ -14,7 +13,6 @@ module r200if(
 input wire clk;
 input wire [31:0] pc_brtarg;
 input wire [31:0] pc_jumptarg;
-input wire [31:0] pc_addrin;
 input wire [31:0] pcp4_hold;
 input wire [1:0] pcsel;
 input wire pc_rst; // TODO: leave as reg or not?
@@ -22,6 +20,8 @@ input wire pc_rst; // TODO: leave as reg or not?
 output wire [31:0] instrn; // current instruction
 output wire [31:0] pc_addrout;
 output wire [31:0] pcp4;
+//internal
+wire [31:0] pc_addrin;
 
 pc pcinst( //program counter
 	.clk(clk),
