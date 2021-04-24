@@ -87,7 +87,7 @@ always @* begin
 			willjmp = 0;
 			isbr = 0;
 			end	
-		7'b1101111: //Jump and link relative (jalr)
+		7'b1100111: //Jump and link relative (jalr)
 			begin
 			ra2sel = 0; //rs2 addr = rs2 addr	
 			op1sel = 0;
