@@ -105,7 +105,7 @@ alucont alucontroller(
 );
 regfile gpr(
 	.rs1addr(instrn[19:15]), //rs1 address
-	.rs2addr(instrn[24:20]), //rs2 address
+	.rs2addr(rs2addr), //rs2 address
 	.rdaddr(rdaddr_in), //rd address
 	.rs1o(rs1o),
 	.rs2o(rs2o),
