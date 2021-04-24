@@ -41,81 +41,81 @@ input wire wb_regwr;
 input wire [1:0] wb_wbsel;
 input wire [4:0] wb_rd;
 
-always @(*) begin
+always @(*) begin //TODO: THIS SHOULD BE CLOCK DRIVEN
 	if(ex_regwr) begin
 		if((id_rs1 == ex_rd)&&(id_rs1 != 5'h0)) begin
 			if(ex_wbsel == 2'h0) begin
-				rs1val_cont <= 3'b010;
-				stall <= 0;
+				rs1val_cont = 3'b010;
+				stall = 0;
 			end
 			if(ex_wbsel == 2'h1) begin
-				rs1val_cont <= 3'b000;
-				stall <= 1;
+				rs1val_cont = 3'b000;
+				stall = 1;
 			end
 		end else begin
-			rs2val_cont <= 3'b000;
+			rs2val_cont = 3'b000;
 		end
 		if((id_rs2 == ex_rd)&&(id_rs1 != 5'h0)) begin
 			if(ex_wbsel == 2'h0) begin
-				rs2val_cont <= 3'b010;
-				stall <= 0;
+				rs2val_cont = 3'b010;
+				stall = 0;
 			end
 			if(ex_wbsel == 2'h1) begin
-				rs2val_cont <= 3'b000;
-				stall <= 1;
+				rs2val_cont = 3'b000;
+				stall = 1;
 			end
 		end else begin
-			rs2val_cont <=  3'b000; 
+			rs2val_cont =  3'b000; 
 		end
 	end
 	else if(mem_regwr) begin
 		if((id_rs1 == mem_rd)&&(id_rs1 != 5'h0)) begin
 			if(mem_wbsel == 2'h0) begin
-				rs1val_cont <= 3'b100;
-				stall <= 0;
+				rs1val_cont = 3'b100;
+				stall = 0;
 			end
 			if(mem_wbsel == 2'h1)begin
-				rs1val_cont <= 3'b000;
-				stall <= 1;
+				rs1val_cont = 3'b000;
+				stall = 1;
 			end
 		end else begin
-			rs1val_cont <= 3'b000;
+			rs1val_cont = 3'b000;
 		end
 		
 		
 		if((id_rs2 == mem_rd)&&(id_rs1 != 5'h0)) begin
 			if(mem_wbsel == 2'h0) begin
 			end
-				rs1val_cont <= 3'b100;
-				stall <= 0;
+				rs1val_cont = 3'b100;
+				stall = 0;
 			if(mem_wbsel == 2'h1) begin
-				rs2val_cont <= 3'b000;
-				stall <= 1;
+				rs2val_cont = 3'b000;
+				stall = 1;
 			end
 		end else begin
-			rs2val_cont <= 3'b000;
+			rs2val_cont = 3'b000;
 		end
 	end	
 	else if(wb_regwr) begin	
 		if(id_rs1 == mem_rd) begin
 			if(wb_wbsel == 2'h0)
-				rs1val_cont <= 3'b110;
-				stall <= 0;
+				rs1val_cont = 3'b110;
+				stall = 0;
 			if(wb_wbsel == 2'h1)
-				rs1val_cont <= 3'b111;
-				stall <= 0;
+				rs1val_cont = 3'b111;
+				stall = 0;
 		end else begin
-			rs1val_cont <= 000;
+			rs1val_cont = 000;
 		end
 		if(id_rs2 == mem_rd) begin
 			if(wb_wbsel == 2'h0)
-				rs2val_cont <= 3'b110;
-				stall <= 0;
+				rs2val_cont = 3'b110;
+				stall = 0;
 			if(wb_wbsel == 2'h1)
-				rs2val_cont <= 3'b111;
-				stall <= 0;
+				rs2val_cont = 3'b111;
+				stall = 0;
 		end else begin
-			rs2val_cont <= 000;
+			rs2val_cont = 000;
 		end
 	end
 	else begin
