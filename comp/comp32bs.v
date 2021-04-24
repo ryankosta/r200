@@ -24,7 +24,6 @@ wire gt2; // (a > b)[n-1] & (a == b)[n]
 //third level intermediates
 wire andeqgt3; // (a > b)[n-1] & (a == b)[n]
 wire eq3;
-wire notgt2;
 wire a30gteb30; //a[30:0] >= b[30:0]
 wire gtcond1;
 wire gtcond2;
