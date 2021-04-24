@@ -1,12 +1,10 @@
 module r200wb(
-	clk,
 	wbsel,
 	dmem_out,
 	alu_res,
 	pcp4,
 	reg_win //instrn [11:7]
 );
-input wire clk;
 //input
 input wire [1:0] wbsel;
 input wire [31:0] dmem_out;
