@@ -24,8 +24,8 @@ initial begin
 	Register[0] <= 0;
 end
 always @(*)begin
-	rs1o <= Register[rs1addr];
-	rs2o <= Register[rs2addr];
+	rs1o = Register[rs1addr];
+	rs2o = Register[rs2addr];
 end
 always @(negedge clk) begin
 	if(regwr && rdaddr != 5'h0)
