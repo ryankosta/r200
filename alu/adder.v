@@ -29,7 +29,7 @@ xor (out, xor_ab, cin);
 
 and (andab, a, b);
 and (and_cxab, cin, xor_ab);
-or (cout, and_cxab , andab);
+or (cout, and_cxab , and_ab);
 endmodule
 
 
