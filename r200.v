@@ -56,6 +56,7 @@ wire [31:0] ex_jump_addimm;
 wire [31:0] ex_alu_res;
 wire [31:0] ex_rs2o;
 wire ex_memwr;
+wire ex_regwr;
 wire [1:0] ex_wbsel;
 wire [31:0] ex_pcp4;
 wire [4:0] ex_rdaddr;
@@ -69,6 +70,7 @@ wire mem_memwr;
 //mem output 
 wire [1:0] mem_wbsel;
 wire [31:0] mem_dmem_out;
+wire mem_regwr;
 wire [31:0] mem_alu_res;
 wire [31:0] mem_pcp4;
 wire [4:0] mem_rdaddr;
@@ -80,6 +82,7 @@ wire [31:0] wb_pcp4;
 wire [4:0] wb_rdaddr;
 //wb output
 wire [31:0] wb_reg_win;
+wire wb_regwr;
 
 
 //hazard control
