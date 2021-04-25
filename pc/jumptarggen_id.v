@@ -8,7 +8,11 @@ instrn
 //input
 input wire [31:0] pc;
 input wire [31:0] rs1;
+// warning disabled as naturally not all bits will be used as instrn is
+// decoded
+/* verilator lint_off UNUSED */
 input wire [31:0] instrn; 
+/* verilator lint_on UNUSED */
 //muxed intermediates
 wire [31:0] jalrimm;
 wire [31:0] jalimm;
