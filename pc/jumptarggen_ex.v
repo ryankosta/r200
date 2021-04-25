@@ -1,7 +1,7 @@
 module jumptarggen_ex(
 jumptarg,
 immediate,
-addtoimm,
+addtoimm
 );
 //output
 output wire [31:0] jumptarg;

@@ -66,8 +66,8 @@
 `include "signex/isignex.v"
 
 //pc target generation
-`include "pc/jumptarggen-id.v"
-`include "pc/jumptarggen-ex.v"
+`include "pc/jumptarggen_id.v"
+`include "pc/jumptarggen_ex.v"
 `include "pc/branchtarggen.v"
 
 //comparitor
