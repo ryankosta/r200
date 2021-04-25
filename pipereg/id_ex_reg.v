@@ -15,7 +15,6 @@ module id_ex_reg(
 	id_alu_cont,
 	id_rs1o,
 	id_rs2o,
-	id_rs2addr,
 	id_rdaddr,
 	id_instrn,
 	//ex
@@ -31,7 +30,6 @@ module id_ex_reg(
 	ex_alu_cont,
 	ex_rs1o,
 	ex_rs2o,
-	ex_rs2addr,
 	ex_rdaddr,
 	ex_func3,
 	//stall
@@ -53,7 +51,6 @@ output reg ex_alu_cont;
 //Register file wires
 output reg [31:0] ex_rs1o; //rs1 out
 output reg [31:0] ex_rs2o; //rs2 out
-output reg [4:0] ex_rs2addr; //rs2 addr 
 output reg [4:0] ex_rdaddr; //rs2 addr 
 //data memory wires
 //func3
@@ -81,7 +78,6 @@ input wire id_alu_cont;
 input wire [31:0] id_rs1o; //rs1 out
 input wire [31:0] id_rs2o; //rs2 out
 //data memory wires
-input wire [4:0] id_rs2addr; //rs2 addr 
 input wire [4:0] id_rdaddr; //rs2 addr 
 //pc wires
 input wire id_isbr;
@@ -161,6 +157,7 @@ always @(posedge clk) begin
 		ex_alu_cont <= 0;
 		ex_func3 <= 0;
 		ex_rs2o <= 0;
+input wire [4:0] id_rs2addr; //rs2 addr 
 	end
 
 

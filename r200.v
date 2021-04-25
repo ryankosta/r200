@@ -60,7 +60,6 @@ wire ex_wasel;
 wire [1:0] ex_wbsel;
 wire [31:0] ex_pcp4;
 wire [4:0] ex_rdaddr;
-wire [4:0] ex_rs2addr;
 wire [31:0] ex_jumptarg;
 wire [31:0] ex_brtarg;
 wire ex_willbr;
@@ -156,7 +155,6 @@ id_ex_reg id_ex_cont(
 	.id_alu_cont(id_alu_cont),
 	.id_rs1o(id_rs2o),
 	.id_rs2o(id_rs2o),
-	.id_rs2addr(id_rs2addr),
 	.id_rdaddr(id_rdaddr),
 	.id_instrn(id_instrn),
 
@@ -172,7 +170,6 @@ id_ex_reg id_ex_cont(
 	.ex_alu_cont(ex_alu_cont),
 	.ex_rs1o(ex_rs2o),
 	.ex_rs2o(ex_rs2o),
-	.ex_rs2addr(ex_rs2addr),
 	.ex_rdaddr(ex_rdaddr),
 	.ex_func3(ex_func3),
 	.rst(if_pc_rst),
