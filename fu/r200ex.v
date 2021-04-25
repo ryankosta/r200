@@ -28,9 +28,6 @@ wire comp_lt;
 wire comp_ge;
 wire comp_geu;
 wire comp_ltu;
-//alu wires
-wire alu_0;
-wire alu_neg;
 
 
 
@@ -42,9 +39,7 @@ alu aluinst(
 	.control(alu_cont),
 	.result(alu_res),
 	.lt(comp_lt),
-	.ltu(comp_ltu),
-	.zero(alu_0),
-	.neg(alu_neg)
+	.ltu(comp_ltu)
 );
 jumptarggen_ex jumptarggenerator(
 	.jumptarg(pc_jumptarg),

@@ -5,9 +5,12 @@ operation, //func3
 control, //instr b30; 0 = add, srl; 1 = sub, sra
 result,
 lt,
-ltu,
+ltu
+`ifdef ALUDETECT
+,
 zero,
 neg
+`endif
 );
 //input
 input wire [31:0] a;
@@ -18,8 +21,10 @@ input wire control;
 input wire [2:0] operation;
 //output
 output wire [31:0] result;
+`ifdef ALUDETECT
 output wire zero;
 output wire neg;
+`endif
 //intermediates
 wire shiftdir;
 wire [31:0] orab;
@@ -50,6 +55,7 @@ mux2w32 baddselect(
 	.sel(control),
 	.out(badd)
 );
+// warning disabled due to unused cout and oflow pins
 /* verilator lint_off PINMISSING */
 adder32 adder(
 	.result(addab),
@@ -83,7 +89,9 @@ mux8w32 mux(
 	.sel(operation)
 );
 
+`ifdef ALUDETECT
 //checks
 and32s zerochk(zero,a);
 buf(neg,result[31]);
+`endif
 endmodule
