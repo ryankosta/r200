@@ -3,7 +3,6 @@ module decoder(
 	opcode,
 	op1sel, //0 = reg 1 = upperimm
 	op2sel, //0 = reg 1 = itypeimm 2 =stypeimm 3 = pc+4
-	funcsel, //0 = reg 1 = immediate
 	memwr,
 	regwr,
 	ra2sel, // rs1 = 0 rd = 1
@@ -16,7 +15,6 @@ input wire [6:0] opcode;
 output reg op1sel;
 output reg [1:0] op2sel;
 output reg ra2sel;
-output reg funcsel;
 output reg memwr;
 output reg regwr;
 output reg wasel;
@@ -30,7 +28,6 @@ always @* begin
 			ra2sel = 0; //rs2 addr = rs2 addr	
 			op1sel = 0; //op1 = rs1		
 			op2sel = 0; //op2 = rs2
-			funcsel = 0; 
 			memwr = 0;
 			regwr = 1;
 			wbsel = 0; //write reg from alu 
@@ -43,7 +40,6 @@ always @* begin
 			ra2sel = 0; //rs2 addr = rs2 addr	
 			op1sel = 0; //op1 = rs1
 			op2sel = 1; //op2 = ity[e o,, 
-			funcsel = 1; //
 			memwr = 0;
 			regwr = 1;
 			wbsel = 0; //write reg from alu 
@@ -64,7 +60,6 @@ always @* begin
 			ra2sel = 0; //rs2 addr = rs2 addr	
 			op1sel = 0; //op1 = rs1
 			op2sel = 1; //op2 = itype imm
-			funcsel = 1;
 			memwr = 0;
 			regwr = 1; 
 			wbsel = 1; //write from mem to reg
@@ -77,7 +72,6 @@ always @* begin
 			ra2sel = 0; //rs2 addr = rs2 addr	
 			op1sel = 0;
 			op2sel = 2; //op2 = stype imm
-			funcsel = 1;
 			memwr = 1;
 			regwr = 0;
 			wbsel = 0; //write from alu to reg 
@@ -135,7 +129,6 @@ always @* begin
 			ra2sel = 0; //rs2 addr = rs2 addr	
 			op1sel = 0; //op1 = rs1		
 			op2sel = 0; //op2 = rs2
-			funcsel = 0; 
 			memwr = 0;
 			regwr = 0;
 			wbsel = 0; //write reg from alu 
