@@ -13,7 +13,6 @@ module r200id(
 	rs2addrsel,
 	op1,
 	op2,
-	branchif,
 	alu_cont,
 	rs1o,
 	rs2o,
@@ -33,8 +32,6 @@ input wire clk;
 input wire [31:0] pc_addrout;
 //instruction memory wires
 input wire [31:0] instrn; // current instruction
-//branch selector wires
-input wire branchif;
 
 //Reg writeback
 input wire [31:0] reg_win; //write in
