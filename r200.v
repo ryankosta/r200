@@ -36,7 +36,6 @@ wire id_willjmp;
 wire [31:0] id_jump_imm;
 wire [31:0] id_jump_addimm;
 //ex input
-wire [31:0] ex_dmem_out;
 wire [31:0] ex_immsel;
 wire [31:0] ex_op1;
 wire [31:0] ex_op2;
