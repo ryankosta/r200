@@ -166,6 +166,7 @@ id_ex_reg id_ex_cont(
 	.ex_regwr(ex_regwr),
 	.ex_wasel(ex_wasel),
 	.ex_wbsel(ex_wbsel),
+	.ex_isbr(ex_isbr),
 	.ex_op1(ex_op1),
 	.ex_op2(ex_op2),
 	.ex_alu_cont(ex_alu_cont),
