@@ -21,8 +21,6 @@ module r200id(
 	rdaddr_in,
 	rdaddr_out,
 	reg_win,
-	jump_imm,
-	jump_addimm,
 	isbr,
 	willjmp
 );
@@ -37,9 +35,6 @@ input wire [31:0] pc_addrout;
 input wire [31:0] instrn; // current instruction
 //branch selector wires
 input wire branchif;
-//jumped immediates
-output wire [31:0] jump_imm;
-output wire [31:0] jump_addimm;
 
 //Reg writeback
 input wire [31:0] reg_win; //write in
@@ -158,12 +153,6 @@ mux2w5 waselector( //reg addr to write to
 	.b(5'h1), //x1 00001
 	.sel(wasel),
 	.out(rdaddr_out)
-);
-jumptarggen_id jumptarggenerator(
-	.immediate(jump_imm),
-	.addtoimm(jump_addimm),
-	.pc(pc_addrout),
-	.instrn(instrn)
 );
 
 
