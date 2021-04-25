@@ -4,11 +4,11 @@
 /* R200 section */
 
 //r200 pipeline units
-`include "fu/r200_id.v"
-`include "fu/r200_if.v"
-`include "fu/r200_ex.v"
-`include "fu/r200_mem.v"
-`include "fu/r200_wb.v"
+`include "fu/r200id.v"
+`include "fu/r200if.v"
+`include "fu/r200ex.v"
+`include "fu/r200mem.v"
+`include "fu/r200wb.v"
 
 //pipeline reg units
 `include "pipereg/if_id_reg.v"
