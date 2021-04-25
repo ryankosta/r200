@@ -161,6 +161,7 @@ id_ex_reg id_ex_cont(
 	.id_rdaddr(id_rdaddr),
 	.id_instrn(id_instrn),
 
+	.ex_willjmp(ex_willjmp),
 	.ex_funcsel(ex_funcsel),
 	.ex_memwr(ex_memwr),
 	.ex_regwr(ex_regwr),
