@@ -22,8 +22,10 @@ wire id_memwr;
 wire id_regwr;
 wire [1:0] id_wbsel;
 wire id_alu_cont;
+/* verilator lint_off UNUSED */
 wire [31:0] id_rs1o;
 wire [31:0] id_rs2o;
+/*verilator lint_on UNUSED */
 wire [31:0] id_op1;
 wire [31:0] id_op2;
 wire [4:0] id_rs2addr;
