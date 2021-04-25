@@ -199,8 +199,6 @@ ex_mem_reg ex_mem_cont(
 	.ex_rs2o(ex_rs2o),
 	.ex_memwr(ex_memwr),
 	.ex_regwr(ex_regwr),
-	.ex_willbr(ex_willbr),
-	.ex_willjmp(ex_willjmp),
 	.ex_wbsel(ex_wbsel),
 	.ex_pcp4(ex_pcp4),
 	.ex_rdaddr(ex_rdaddr),
