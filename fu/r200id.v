@@ -9,7 +9,6 @@ module r200id(
 	regwr_out,
 	regwr_in,
 	wbsel,
-	rs2addrsel,
 	op1,
 	op2,
 	alu_cont,
