@@ -48,7 +48,7 @@
 
 
 `include "mux.vh"
-`include "decode/decode.v"
+`include "decode/decoder.v"
 `include "pc/pc.v"
 `include "mem/mem.v"
 `include "mem/dmem-nclk.v"
