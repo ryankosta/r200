@@ -38,7 +38,7 @@ not(shiftdir,operation[2]); // op2 == 0 -> shdir = 1 -> shift left; op2 = 1 -> s
 assign sltab[31:1] = 30'b0;
 assign sltab[0] = lt;
 assign sltuab[31:1] = 30'b0;
-assign stluab[0] = ltu;
+assign sltuab[0] = ltu;
 
 or32 orop(orab,a,b);
 and32 andop(andab,a,b);
@@ -50,12 +50,14 @@ mux2w32 baddselect(
 	.sel(control),
 	.out(badd)
 );
+/* verilator lint_off PINMISSING */
 adder32 adder(
 	.result(addab),
 	.cin(control),
 	.a(a),
 	.b(badd)
 );
+/* verilator lint_on PINMISSING */
 
 mshifter32 shifter(
 	.out(ashiftbyb),

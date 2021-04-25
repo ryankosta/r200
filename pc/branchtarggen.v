@@ -22,12 +22,15 @@ signex13 signex(
 	.in(btypeshrt),
 	.out(btype)
 );
+// warning disabled due to unused oflow and cout signals
+/* verilator lint_off PINMISSING */
 adder32 adder32(
 	.result(br),
 	.a(btype),
 	.b(pc),
 	.cin(1'b0)
 );
+/* verilator lint_on PINMISSING */
 
 //btypeshrt[0] = 0 always
 buf(btypeshrt[0],0);

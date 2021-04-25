@@ -1,6 +1,5 @@
 module comp16b(
 	gt,
-	lt,
 	eq,
 	a,
 	b
@@ -10,7 +9,6 @@ input wire [15:0] a;
 input wire [15:0] b;
 //output wire
 output wire gt;
-output wire lt;
 output wire eq;
 //first level intermediates
 wire [3:0] gtcomp;
@@ -42,7 +40,6 @@ and(eq,eqcomp2[1],eqcomp2[0]);
 and(andeqgt3,eqcomp2[1],gtcomp2[0]);
 or(gt,gtcomp2[1],andeqgt3);
 
-not(lt,gt);
 
 
 endmodule

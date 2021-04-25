@@ -29,12 +29,15 @@ pc pcinst( //program counter
 	.aout(pc_addrout),
 	.rst(pc_rst)
 );
+// warning removed due to unused oflow and cout signals
+/* verilator lint_off PINMISSING */
 adder32 pcp4add( //pc+4 adder
 	.a(pc_addrout),
 	.b(32'h4),
 	.cin(1'b0),
 	.result(pcp4)
 );
+/* verilator lint_on PINMISSING */
 mem instrnmem( //instruction memory
 	.out(instrn),
 	.raddr(pc_addrout),
