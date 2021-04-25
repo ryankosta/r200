@@ -124,6 +124,8 @@ r200id idecode(
 	.regwr_in(wb_regwr),
 	.wbsel(id_wbsel),
 	.isbr(id_isbr),
+	.jump_imm(id_jump_imm),
+	.jump_addimm(id_jump_addimm),
 	.willjmp(id_willjmp),
 	.op1(id_op1),
 	.op2(id_op2),
