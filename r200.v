@@ -7,8 +7,6 @@ input wire clk;
 input wire rst;
 //---------instruction fetch
 //if input
-wire [31:0] if_pc_brtarg;
-wire [31:0] if_pc_jumptarg;
 reg rst;
 //if output
 wire [31:0] if_instrn;
