@@ -163,6 +163,8 @@ id_ex_reg id_ex_cont(
 
 	.ex_funcsel(ex_funcsel),
 	.ex_memwr(ex_memwr),
+	.ex_willbr(ex_willbr),
+	.ex_willjmp(ex_willjmp),
 	.ex_regwr(ex_regwr),
 	.ex_wasel(ex_wasel),
 	.ex_wbsel(ex_wbsel),
