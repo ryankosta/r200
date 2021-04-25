@@ -22,7 +22,6 @@ wire id_op1sel;
 wire [1:0] id_op2sel;
 wire id_memwr;
 wire id_regwr;
-wire id_wasel;
 wire [1:0] id_wbsel;
 wire id_alu_cont;
 wire [31:0] id_rs1o;
@@ -52,7 +51,6 @@ wire [31:0] ex_alu_res;
 wire [31:0] ex_rs2o;
 wire ex_memwr;
 wire ex_regwr;
-wire ex_wasel;
 wire [1:0] ex_wbsel;
 wire [31:0] ex_pcp4;
 wire [4:0] ex_rdaddr;
@@ -140,8 +138,6 @@ r200id idecode(
 id_ex_reg id_ex_cont(
 	.clk(clk),
 	.id_memwr(id_memwr),
-	.id_regwr(id_regwr),
-	.id_wasel(id_wasel),
 	.id_wbsel(id_wbsel),
 	.id_isbr(id_isbr),
 	.id_willjmp(id_willjmp),
@@ -158,7 +154,6 @@ id_ex_reg id_ex_cont(
 	.ex_willjmp(ex_willjmp),
 	.ex_memwr(ex_memwr),
 	.ex_regwr(ex_regwr),
-	.ex_wasel(ex_wasel),
 	.ex_wbsel(ex_wbsel),
 	.ex_isbr(ex_isbr),
 	.ex_op1(ex_op1),
