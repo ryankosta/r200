@@ -17,7 +17,6 @@ wire [31:0] if_pcp4;
 wire [31:0] id_instrn;
 wire [31:0] id_pc_addrout;
 wire [31:0] id_pcp4;
-wire id_branchif; //#TODO FIX
 //id output
 wire id_op1sel;
 wire [1:0] id_op2sel;
