@@ -18,7 +18,7 @@
 
 //pipeline control
 `include "pipecont/hazard.v"
-`include "pipecont/pc-cont.v"
+`include "pipecont/pccont.v"
 
 /* ALU SECTION */
 
