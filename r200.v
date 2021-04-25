@@ -147,6 +147,7 @@ id_ex_reg id_ex_cont(
 	.id_rs2o(id_rs2o),
 	.id_rdaddr(id_rdaddr),
 	.id_instrn(id_instrn),
+	.id_pcp4(id_pcp4),
 	.id_jmp_imm(id_jump_imm),
 	.id_jmp_addimm(id_jump_addimm),
 
@@ -162,9 +163,10 @@ id_ex_reg id_ex_cont(
 	.ex_rs2o(ex_rs2o),
 	.ex_rdaddr(ex_rdaddr),
 	.ex_func3(ex_func3),
-
+	.ex_pcp4(ex_pcp4),
 	.ex_jmp_imm(ex_jump_imm),
 	.ex_jmp_addimm(ex_jump_addimm),
+
 	.rst(rst),
 	.stall(id_ex_stall)
 

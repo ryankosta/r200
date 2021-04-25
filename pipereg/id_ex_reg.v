@@ -15,6 +15,7 @@ module id_ex_reg(
 	id_rs2o,
 	id_rdaddr,
 	id_instrn,
+	id_pcp4,
 	id_jmp_imm,
 	id_jmp_addimm,
 	//ex
@@ -30,6 +31,7 @@ module id_ex_reg(
 	ex_rs2o,
 	ex_rdaddr,
 	ex_func3,
+	ex_pcp4,
 	ex_jmp_imm,
 	ex_jmp_addimm,
 	//stall
@@ -57,6 +59,7 @@ output reg [2:0] ex_func3;
 output reg [31:0] ex_jmp_imm;
 output reg [31:0] ex_jmp_addimm;
 //pc wires
+output reg [31:0] ex_pcp4;
 output reg ex_isbr;
 output reg ex_willjmp;
 //----------Input
@@ -85,6 +88,7 @@ input wire [4:0] id_rdaddr; //rs2 addr
 input wire [31:0] id_jmp_imm;
 input wire [31:0] id_jmp_addimm;
 //pc wires
+input wire [31:0] id_pcp4;
 input wire id_isbr;
 input wire id_willjmp;
 
@@ -103,6 +107,7 @@ reg stall_memwr;
 reg stall_regwr;
 reg [2:0] stall_func3;
 //pc control
+reg [31:0] stall_pcp4;
 reg stall_isbr;
 reg stall_willjmp;
 //jump target generation 
@@ -125,12 +130,14 @@ always @(posedge clk) begin
 	ex_rs1o <= id_rs1o;
 	ex_rs2o <= id_rs2o;
 	ex_func3 <= id_instrn[14:12]; //id's rdaddr_out
+	ex_pcp4 <= id_pcp4;
 	ex_jmp_imm <= id_jmp_imm;
 	ex_jmp_addimm <= id_jmp_addimm;
 	end
 	else if(stall & !stalldata) begin
 		stall_isbr <= id_isbr;
 		stall_willjmp <= id_willjmp;
+		stall_pcp4 <= id_pcp4;
 		stall_jmp_imm <= id_jmp_imm;
 		stall_jmp_addimm <= id_jmp_imm;
 		stall_memwr <= id_memwr;
@@ -154,6 +161,7 @@ always @(posedge clk) begin
 		ex_isbr <= stall_isbr;
 		ex_rdaddr <= stall_rdaddr;
 		ex_willjmp <= stall_willjmp;
+		ex_pcp4 <= stall_pcp4;
 		ex_jmp_imm <= stall_jmp_imm;
 		ex_jmp_addimm <= stall_jmp_addimm;
 		stalldata <= 0;
