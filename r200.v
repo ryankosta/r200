@@ -27,7 +27,6 @@ wire id_memwr;
 wire id_regwr;
 wire id_wasel;
 wire [1:0] id_wbsel;
-wire [1:0] id_pcsel;
 wire id_rs2addrsel;
 wire id_alu_cont;
 wire [31:0] id_rs1o;
@@ -261,6 +260,7 @@ hazard hazard_cont(
 	.wb_regwr(wb_regwr),
 	.stall(id_ex_stall)
 );
+//PC Control: Generates PC Select Signal
 pccont pccontrol(
 	.id_jmp(id_willjmp),
 	.id_isbr(id_isbr),
