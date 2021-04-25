@@ -38,12 +38,16 @@ adder32 pcp4add( //pc+4 adder
 	.result(pcp4)
 );
 /* verilator lint_on PINMISSING */
+// warning removed due to unused waddr and writeout signals as this is r only
+// mem
+/* verilator lint_off PINMISSING */
 mem instrnmem( //instruction memory
 	.out(instrn),
 	.raddr(pc_addrout),
 	.memwr(1'b0),
 	.clk(clk)
 );
+/* verilator lint_on PINMISSING */
 mux4w32 pcselector(
 	.a(pcp4),
 	.b(pc_brtarg),
