@@ -55,7 +55,6 @@ wire [1:0] ex_wbsel;
 wire [31:0] ex_pcp4;
 wire [4:0] ex_rdaddr;
 wire [31:0] ex_jumptarg;
-wire [31:0] ex_brtarg;
 wire ex_willbr;
 //mem input 
 wire [31:0] mem_rs2o;
