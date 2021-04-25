@@ -38,7 +38,7 @@ not(shiftdir,operation[2]); // op2 == 0 -> shdir = 1 -> shift left; op2 = 1 -> s
 assign sltab[31:1] = 30'b0;
 assign sltab[0] = lt;
 assign sltuab[31:1] = 30'b0;
-assign stluab[0] ltu;
+assign stluab[0] = ltu;
 
 or32 orop(orab,a,b);
 and32 andop(andab,a,b);
