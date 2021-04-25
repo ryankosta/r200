@@ -5,7 +5,6 @@ module id_ex_reg(
 	//id
 	id_memwr,
 	id_regwr,
-	id_wasel,
 	id_wbsel,
 	id_isbr,
 	id_willjmp,
@@ -21,7 +20,6 @@ module id_ex_reg(
 	//ex
 	ex_memwr,
 	ex_regwr,
-	ex_wasel,
 	ex_wbsel,
 	ex_isbr,
 	ex_willjmp,
@@ -42,7 +40,6 @@ module id_ex_reg(
 //decoder wires
 output reg ex_memwr;
 output reg ex_regwr;
-output reg ex_wasel;
 output reg [1:0] ex_wbsel;
 //op wires
 output reg [31:0] ex_op1;
@@ -70,7 +67,6 @@ input wire [31:0] id_instrn;
 //decoder wires
 input wire id_memwr;
 input wire id_regwr;
-input wire id_wasel;
 input wire [1:0] id_wbsel;
 //op wires
 input wire [31:0] id_op1;
@@ -118,7 +114,6 @@ always @(posedge clk) begin
 	ex_willjmp <= id_willjmp;
 	ex_memwr <= id_memwr;
 	ex_regwr <= id_regwr;
-	ex_wasel <= id_wasel;
 	ex_wbsel <= id_wbsel;
 	ex_rdaddr <= id_rdaddr;
 	ex_op1 <= id_op1;
