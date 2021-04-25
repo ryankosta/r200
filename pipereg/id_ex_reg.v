@@ -104,12 +104,11 @@ reg stall_regwr;
 reg [2:0] stall_func3;
 reg stall_isbr;
 reg stall_willjmp;
-always @(rst) begin
-	stalldata <= 0;
-end
-
 always @(posedge clk) begin
-	if(!stall & !stalldata) begin
+	if (rst) begin
+		stalldata <= 0;
+	end
+	else if(!stall & !stalldata) begin
 	ex_isbr <= id_isbr;
 	ex_willjmp <= id_willjmp;
 	ex_funcsel <= id_funcsel;
