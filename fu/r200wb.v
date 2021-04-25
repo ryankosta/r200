@@ -18,6 +18,7 @@ mux4w32 wbselector( //select which data written into register
 	.a(alu_res),
 	.b(dmem_out),
 	.c(pcp4),
+	.d(32'b0),
 	.sel(wbsel),
 	.out(reg_win)
 );
