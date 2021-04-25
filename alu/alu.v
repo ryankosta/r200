@@ -40,9 +40,9 @@ wire [31:0] ashiftbyb;
 not(shiftdir,operation[2]); // op2 == 0 -> shdir = 1 -> shift left; op2 = 1 -> shdir = 0 ->shift right
 //operations
 //Set less thans
-assign sltab[31:1] = 30'b0;
+assign sltab[31:1] = 31'b0;
 assign sltab[0] = lt;
-assign sltuab[31:1] = 30'b0;
+assign sltuab[31:1] = 31'b0;
 assign sltuab[0] = ltu;
 
 or32 orop(orab,a,b);
