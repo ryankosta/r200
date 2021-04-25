@@ -1,13 +1,15 @@
 `include "cpu.vh"
 module r200(
-	clk
+	clk,
+	rst
 );
 input wire clk;
+input wire rst;
 //---------instruction fetch
 //if input
 wire [31:0] if_pc_brtarg;
 wire [31:0] if_pc_jumptarg;
-reg if_pc_rst;
+reg rst;
 //if output
 wire [31:0] if_instrn;
 wire [31:0] if_pc_addrout;
@@ -99,7 +101,7 @@ r200if ifetch(
 	.pc_addrout(if_pc_addrout),
 	.instrn(if_instrn),
 	.pcp4(if_pcp4),
-	.pc_rst(if_pc_rst),
+	.pc_rst(rst),
 
 	.pc_brtarg(id_pc_brtarg),
 	.pc_jumptarg(ex_jumptarg),
@@ -170,7 +172,7 @@ id_ex_reg id_ex_cont(
 	.ex_rs2o(ex_rs2o),
 	.ex_rdaddr(ex_rdaddr),
 	.ex_func3(ex_func3),
-	.rst(if_pc_rst),
+	.rst(rst),
 	.stall(id_ex_stall)
 
 );
@@ -269,7 +271,7 @@ pccont pccontrol(
 	.pcsel(pcsel),
 	.pcp4_hold(pcp4_hold),
 	.if_id_retire(if_id_retire),
-	.rst(if_pc_rst)
+	.rst(rst)
 );
 mux8w32 rs1mux(
 	.a(id_op1),
