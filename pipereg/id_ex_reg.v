@@ -101,7 +101,7 @@ reg stall_funcsel;
 reg stall_alu_cont;
 reg stall_memwr;
 reg stall_regwr;
-reg stall_func3;
+reg [2:0] stall_func3;
 reg stall_isbr;
 reg stall_willjmp;
 always @(rst) begin
