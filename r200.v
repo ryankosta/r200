@@ -20,7 +20,6 @@ wire [31:0] id_pcp4;
 //id output
 wire id_op1sel;
 wire [1:0] id_op2sel;
-wire id_funcsel;
 wire id_memwr;
 wire id_regwr;
 wire id_wasel;
@@ -42,7 +41,6 @@ wire [31:0] ex_op1;
 wire [31:0] ex_op2;
 wire ex_alu_cont;
 wire [2:0] ex_func3;
-wire ex_funcsel;
 wire ex_isbr;
 wire ex_willjmp;
 wire [31:0] ex_jump_imm;
@@ -120,7 +118,6 @@ r200id idecode(
 	.instrn(id_instrn),
 	.pcp4(id_pcp4),
 	.pc_brtarg(id_pc_brtarg),
-	.funcsel(id_funcsel),
 	.memwr(id_memwr),
 	.regwr_out(id_regwr),
 	.regwr_in(wb_regwr),
@@ -139,7 +136,6 @@ r200id idecode(
 );
 id_ex_reg id_ex_cont(
 	.clk(clk),
-	.id_funcsel(id_funcsel),
 	.id_memwr(id_memwr),
 	.id_regwr(id_regwr),
 	.id_wasel(id_wasel),
@@ -155,7 +151,6 @@ id_ex_reg id_ex_cont(
 	.id_instrn(id_instrn),
 
 	.ex_willjmp(ex_willjmp),
-	.ex_funcsel(ex_funcsel),
 	.ex_memwr(ex_memwr),
 	.ex_regwr(ex_regwr),
 	.ex_wasel(ex_wasel),

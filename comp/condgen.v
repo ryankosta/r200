@@ -7,7 +7,7 @@ module condgen(
 	lt,
 	ge,
 	ltu,
-	geu,
+	geu
 );
 //input
 input wire [31:0] a;

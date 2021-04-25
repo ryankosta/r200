@@ -1,10 +1,14 @@
 module adder32(
 result,
+/* verilator lint_off PINMISSING */
 cout,
+/* verilator lint_on PINMISSING */
 cin,
 a,
 b,
+/* verilator lint_off PINMISSING */
 oflow
+/* verilator lint_on PINMISSING */
 );
 //inputs
 input cin;

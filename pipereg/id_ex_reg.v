@@ -3,7 +3,6 @@ module id_ex_reg(
 	clk,
 	rst,
 	//id
-	id_funcsel,
 	id_memwr,
 	id_regwr,
 	id_wasel,
@@ -18,7 +17,6 @@ module id_ex_reg(
 	id_rdaddr,
 	id_instrn,
 	//ex
-	ex_funcsel,
 	ex_memwr,
 	ex_regwr,
 	ex_wasel,
@@ -38,7 +36,6 @@ module id_ex_reg(
 );
 //----------Output
 //decoder wires
-output reg ex_funcsel;
 output reg ex_memwr;
 output reg ex_regwr;
 output reg ex_wasel;
@@ -64,7 +61,6 @@ input wire clk;
 //pc wires
 input wire [31:0] id_instrn;
 //decoder wires
-input wire id_funcsel;
 input wire id_memwr;
 input wire id_regwr;
 input wire id_wasel;
@@ -93,7 +89,6 @@ reg [31:0] stall_rs2o; //rs2 out
 reg [31:0] stall_op1; //rs2 out
 reg [31:0] stall_op2; //rs2 out
 reg [4:0] stall_rdaddr; //rdaddr
-reg stall_funcsel;
 reg stall_alu_cont;
 reg stall_memwr;
 reg stall_regwr;
@@ -107,7 +102,6 @@ always @(posedge clk) begin
 	else if(!stall & !stalldata) begin
 	ex_isbr <= id_isbr;
 	ex_willjmp <= id_willjmp;
-	ex_funcsel <= id_funcsel;
 	ex_memwr <= id_memwr;
 	ex_regwr <= id_regwr;
 	ex_wasel <= id_wasel;
@@ -121,7 +115,6 @@ always @(posedge clk) begin
 	ex_func3 <= id_instrn[14:12]; //id's rdaddr_out
 	end
 	else if(stall & !stalldata) begin
-		stall_funcsel <= id_funcsel;
 		stall_isbr <= id_isbr;
 		stall_willjmp <= id_willjmp;
 		stall_memwr <= id_memwr;
@@ -135,7 +128,6 @@ always @(posedge clk) begin
 		stalldata <= 1;
 	end
 	else if(!stall & stalldata) begin
-		ex_funcsel <= stall_funcsel;
 		ex_memwr <= stall_memwr;
 		ex_regwr <= stall_regwr;
 		ex_op1 <= stall_op1;
@@ -149,7 +141,6 @@ always @(posedge clk) begin
 		stalldata <= 0;
 	end
 	if(stall) begin
-		ex_funcsel <= 0;
 		ex_memwr <= 0;
 		ex_regwr <= 1;
 		ex_op1 <= 0;

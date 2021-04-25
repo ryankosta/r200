@@ -4,7 +4,6 @@ module r200id(
 	pc_brtarg,
 	pcp4,
 	instrn,
-	funcsel,
 	memwr,
 	regwr_out,
 	regwr_in,
@@ -43,7 +42,6 @@ input wire [31:0] pcp4;
 //pc wires
 output wire [31:0] pc_brtarg;
 //decoder wires
-output wire funcsel;
 output wire memwr;
 output wire regwr_out;
 output wire [1:0] wbsel;
@@ -80,7 +78,6 @@ decoder decoderinst(
 	.ra2sel(rs2addrsel),
 	.op1sel(op1sel),
 	.op2sel(op2sel),
-	.funcsel(funcsel),
 	.memwr(memwr),
 	.regwr(regwr_out),
 	.wasel(wasel),
