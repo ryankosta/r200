@@ -137,6 +137,7 @@ r200id idecode(
 id_ex_reg id_ex_cont(
 	.clk(clk),
 	.id_memwr(id_memwr),
+	.id_regwr(id_regwr),
 	.id_wbsel(id_wbsel),
 	.id_isbr(id_isbr),
 	.id_willjmp(id_willjmp),
