@@ -18,7 +18,9 @@ module r200id(
 	rdaddr_out,
 	reg_win,
 	isbr,
-	willjmp
+	willjmp,
+	jump_imm,
+	jump_addimm
 );
 //clock
 input wire clk;
@@ -57,6 +59,9 @@ output wire [31:0] rs1o; //rs1 out
 output wire [31:0] rs2o; //rs2 out
 output wire [4:0] rs2addr; //rs2 addr 
 output wire [4:0] rdaddr_out;
+//Jump wires
+output wire [31:0] jump_imm;
+output wire [31:0] jump_addimm; 
 
 
 //---------Intermediate wires
@@ -109,6 +114,14 @@ ssignex ssignextender(
 	.instrn11_7(instrn[11:7]),
 	.instrn31_25(instrn[31:25]),
 	.stypeimm(imm_stype)
+);
+
+jumptarggen_id jumptarggenerator(
+	.immediate(jump_imm),
+	.addtoimm(jump_addimm),
+	.rs1(rs1o),
+	.pc(pcp4), //TODO: check if this should be pcp4 or just pc
+	.instrn(instrn)
 );
 branchtarggen brtarggenerator(
 	.instrn11_7(instrn[11:7]),

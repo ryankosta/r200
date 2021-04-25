@@ -34,6 +34,8 @@ wire [4:0] id_rdaddr;
 wire [31:0] id_pc_brtarg;
 wire id_isbr;
 wire id_willjmp;
+wire [31:0] id_jump_imm;
+wire [31:0] id_jump_addimm;
 //ex input
 wire [31:0] ex_dmem_out;
 wire [31:0] ex_immsel;
@@ -148,6 +150,8 @@ id_ex_reg id_ex_cont(
 	.id_rs2o(id_rs2o),
 	.id_rdaddr(id_rdaddr),
 	.id_instrn(id_instrn),
+	.id_jmp_imm(id_jump_imm),
+	.id_jmp_addimm(id_jump_addimm),
 
 	.ex_willjmp(ex_willjmp),
 	.ex_memwr(ex_memwr),
@@ -162,6 +166,9 @@ id_ex_reg id_ex_cont(
 	.ex_rs2o(ex_rs2o),
 	.ex_rdaddr(ex_rdaddr),
 	.ex_func3(ex_func3),
+
+	.ex_jmp_imm(ex_jump_imm),
+	.ex_jmp_addimm(ex_jump_addimm),
 	.rst(rst),
 	.stall(id_ex_stall)
 
@@ -172,9 +179,9 @@ r200ex execute(
 	.op2(ex_op2),
 	.alu_cont(ex_alu_cont),
 	.func3(ex_func3),
-	//out
-	.jump_imm(ex_jump_imm),
 	.jump_addimm(ex_jump_addimm),
+	.jump_imm(ex_jump_imm),
+	//out
 	.alu_res(ex_alu_res),
 	.willbr(ex_willbr),
 	.pc_jumptarg(ex_jumptarg)

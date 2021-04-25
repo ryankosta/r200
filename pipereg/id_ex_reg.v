@@ -16,6 +16,8 @@ module id_ex_reg(
 	id_rs2o,
 	id_rdaddr,
 	id_instrn,
+	id_jmp_imm,
+	id_jmp_addimm,
 	//ex
 	ex_memwr,
 	ex_regwr,
@@ -30,6 +32,8 @@ module id_ex_reg(
 	ex_rs2o,
 	ex_rdaddr,
 	ex_func3,
+	ex_jmp_imm,
+	ex_jmp_addimm,
 	//stall
 	stall
 
@@ -52,6 +56,9 @@ output reg [4:0] ex_rdaddr; //rs2 addr
 //data memory wires
 //func3
 output reg [2:0] ex_func3;
+//Jump target generation
+output reg [31:0] ex_jmp_imm;
+output reg [31:0] ex_jmp_addimm;
 //pc wires
 output reg ex_isbr;
 output reg ex_willjmp;
@@ -75,6 +82,9 @@ input wire [31:0] id_rs1o; //rs1 out
 input wire [31:0] id_rs2o; //rs2 out
 //data memory wires
 input wire [4:0] id_rdaddr; //rs2 addr 
+//Jump target generation
+input wire [31:0] id_jmp_imm;
+input wire [31:0] id_jmp_addimm;
 //pc wires
 input wire id_isbr;
 input wire id_willjmp;
@@ -84,7 +94,7 @@ input wire id_willjmp;
 input wire stall;
 input wire rst;
 reg stalldata; //if stalldata is valid
-//stall data
+//---stall data
 reg [31:0] stall_rs2o; //rs2 out
 reg [31:0] stall_op1; //rs2 out
 reg [31:0] stall_op2; //rs2 out
@@ -93,8 +103,12 @@ reg stall_alu_cont;
 reg stall_memwr;
 reg stall_regwr;
 reg [2:0] stall_func3;
+//pc control
 reg stall_isbr;
 reg stall_willjmp;
+//jump target generation 
+reg [31:0] stall_jmp_imm;
+reg [31:0] stall_jmp_addimm;
 always @(posedge clk) begin
 	if (rst) begin
 		stalldata <= 0;
@@ -113,10 +127,14 @@ always @(posedge clk) begin
 	ex_rs1o <= id_rs1o;
 	ex_rs2o <= id_rs2o;
 	ex_func3 <= id_instrn[14:12]; //id's rdaddr_out
+	ex_jmp_imm <= id_jmp_imm;
+	ex_jmp_addimm <= id_jmp_addimm;
 	end
 	else if(stall & !stalldata) begin
 		stall_isbr <= id_isbr;
 		stall_willjmp <= id_willjmp;
+		stall_jmp_imm <= id_jmp_imm;
+		stall_jmp_addimm <= id_jmp_imm;
 		stall_memwr <= id_memwr;
 		stall_regwr <= id_regwr;
 		stall_op1 <= id_op1;
@@ -138,6 +156,8 @@ always @(posedge clk) begin
 		ex_isbr <= stall_isbr;
 		ex_rdaddr <= stall_rdaddr;
 		ex_willjmp <= stall_willjmp;
+		ex_jmp_imm <= stall_jmp_imm;
+		ex_jmp_addimm <= stall_jmp_addimm;
 		stalldata <= 0;
 	end
 	if(stall) begin
