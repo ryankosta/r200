@@ -63,7 +63,10 @@ output reg ex_willjmp;
 //clock
 input wire clk;
 //pc wires
+// warning ignored as id_instrn is decoded and thus some bits unused
+/* verilator lint_off UNUSED */
 input wire [31:0] id_instrn;
+/* verilator lint_on UNUSED */
 //decoder wires
 input wire id_memwr;
 input wire id_regwr;
