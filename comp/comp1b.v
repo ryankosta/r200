@@ -12,12 +12,10 @@ output wire gt;
 output wire eq;
 //intermediates
 wire xab;
-wire ge; //greater than or equal to
 
 xor(xab,a,b);
 not(eq,xab);
 and(gt,xab,a);
-or(ge,gt,eq);
 endmodule
 
 
