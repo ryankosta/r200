@@ -51,7 +51,7 @@
 `include "decode/decoder.v"
 `include "pc/pc.v"
 `include "mem/mem.v"
-`include "mem/dmem-nclk.v"
+`include "mem/dmemnclk.v"
 `include "decode/regfile.v"
 
 

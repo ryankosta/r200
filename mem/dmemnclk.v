@@ -34,10 +34,10 @@ always @(negedge clk) begin
 
 end
 always @(*) begin
-	out[7:0] <= ram [raddr];
-	out[15:8] <= ram [raddr+1];
-	out[23:16] <= ram [raddr+2];
-	out[31:24] <= ram [raddr+3];
+	out[7:0] = ram [raddr];
+	out[15:8] = ram [raddr+1];
+	out[23:16] = ram [raddr+2];
+	out[31:24] = ram [raddr+3];
 
 end
 endmodule
