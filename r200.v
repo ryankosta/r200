@@ -36,7 +36,6 @@ wire [31:0] id_op2;
 wire [4:0] id_rs2addr;
 wire [4:0] id_rdaddr;
 wire [31:0] id_pc_brtarg;
-wire [5:0] id_rs1addr;
 wire id_isbr;
 wire id_willjmp;
 //ex input
