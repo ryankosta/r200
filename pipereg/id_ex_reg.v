@@ -157,7 +157,6 @@ always @(posedge clk) begin
 		ex_alu_cont <= 0;
 		ex_func3 <= 0;
 		ex_rs2o <= 0;
-input wire [4:0] id_rs2addr; //rs2 addr 
 	end
 
 
