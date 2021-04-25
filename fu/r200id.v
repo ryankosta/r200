@@ -9,7 +9,6 @@ module r200id(
 	regwr_out,
 	regwr_in,
 	wbsel,
-	pcsel,
 	rs2addrsel,
 	op1,
 	op2,
@@ -49,7 +48,6 @@ output wire funcsel;
 output wire memwr;
 output wire regwr_out;
 output wire [1:0] wbsel;
-output wire [1:0] pcsel;
 output wire rs2addrsel;
 output wire isbr;
 output wire willjmp;
