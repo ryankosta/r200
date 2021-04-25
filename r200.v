@@ -239,7 +239,6 @@ mem_wb_reg mem_wb_cont(
 
 
 r200wb writeback(
-	.clk(clk),
 	.wbsel(wb_wbsel),
 	.dmem_out(wb_dmem_out),
 	.alu_res(wb_alu_res),
