@@ -48,7 +48,6 @@ output wire funcsel;
 output wire memwr;
 output wire regwr_out;
 output wire [1:0] wbsel;
-output wire rs2addrsel;
 output wire isbr;
 output wire willjmp;
 //op wires
@@ -73,6 +72,8 @@ wire [31:0] imm_itype;
 wire [31:0] imm_utype;
 //write addr select
 wire wasel;
+//rs2 address selection
+wire rs2addrsel;
 
 
 decoder decoderinst(

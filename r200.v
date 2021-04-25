@@ -25,7 +25,6 @@ wire id_memwr;
 wire id_regwr;
 wire id_wasel;
 wire [1:0] id_wbsel;
-wire id_rs2addrsel;
 wire id_alu_cont;
 wire [31:0] id_rs1o;
 wire [31:0] id_rs2o;
