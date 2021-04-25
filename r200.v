@@ -18,8 +18,6 @@ wire [31:0] id_instrn;
 wire [31:0] id_pc_addrout;
 wire [31:0] id_pcp4;
 //id output
-wire id_op1sel;
-wire [1:0] id_op2sel;
 wire id_memwr;
 wire id_regwr;
 wire [1:0] id_wbsel;
@@ -36,7 +34,6 @@ wire id_willjmp;
 wire [31:0] id_jump_imm;
 wire [31:0] id_jump_addimm;
 //ex input
-wire [31:0] ex_immsel;
 wire [31:0] ex_op1;
 wire [31:0] ex_op2;
 wire ex_alu_cont;
